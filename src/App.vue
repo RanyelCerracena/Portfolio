@@ -2,7 +2,6 @@
 import { RouterLink, RouterView } from 'vue-router'
 import BackgroundAnimation from './components/BackgroundAnimation.vue'
 import TheHeader from './components/TheHeader.vue'
-import AboutMeView from './views/AboutMeView.vue'
 </script>
 
 <template>

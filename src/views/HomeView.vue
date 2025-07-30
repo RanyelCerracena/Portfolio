@@ -1,20 +1,55 @@
 <template>
   <div class="home">
-    <h1 class="typewriterAnimation line1">Olá. Eu sou Ranyel Cerracena.</h1>
-    <h1 class="typewriterAnimation line2">Desenvolvedor Full-Stack, e esse, é o meu portfólio.</h1>
+    <div>
+      <h1 class="typewriterAnimation">{{ helloText }}</h1>
+      <h1 class="typewriterAnimation">{{ devText }} <div class="lineBlink"></div>
+      </h1>
+    </div>
   </div>
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue'
+
 defineOptions({
   name: 'HomeView',
 })
+
+const helloText = ref('')
+const devText = ref('')
+
+const fullHelloText = 'Olá, eu sou Ranyel Cerracena'
+const fullDevText = 'Desenvolvedor Full Stack'
+
+onMounted(async () => {
+  await animateTyping(helloText, fullHelloText)
+  await animateTyping(devText, fullDevText)
+})
+
+function animateTyping(targetRef, fullText) {
+  return new Promise((resolve) => {
+    let index = 0;
+    targetRef.value = '';
+
+    function step() {
+      if (index < fullText.length) {
+        targetRef.value += fullText.charAt(index);
+        index++;
+        setTimeout(step, 50);
+      } else {
+        resolve();
+      }
+    }
+    step();
+  });
+}
+
 </script>
 
 <style scoped>
 .home {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -30,48 +65,18 @@ defineOptions({
   margin: 0;
 }
 
-.typewriterAnimation {
+
+.lineBlink {
   display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid #fff;
-}
-
-/* Primeira linha */
-.line1 {
-  width: 0;
-  animation: typing1 4s steps(35, end) forwards, blink 0.75s step-end infinite;
-}
-
-/* Segunda linha (com atraso para começar após a primeira) */
-.line2 {
-  width: 0;
-  animation: typing2 4s steps(60, end) forwards;
-  animation-delay: 4s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes typing1 {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes typing2 {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
+  width: 2px;
+  height: 35px;
+  background-color: var(--color-text);
+  animation: blink 1s infinite;
 }
 
 @keyframes blink {
   50% {
-    border-color: transparent;
+    background-color: transparent;
   }
 }
 </style>
