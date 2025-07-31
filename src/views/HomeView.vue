@@ -1,55 +1,41 @@
 <template>
   <div class="home">
-    <div>
-      <h1 class="typewriterAnimation">{{ helloText }}</h1>
-      <h1 class="typewriterAnimation">{{ devText }} <div class="lineBlink"></div>
-      </h1>
-    </div>
+    <h1 class="homeText">{{ helloText }}</h1>
+    <h2 class="devText">{{ devText }}</h2>
+
+    <section class="sectionsButtons">
+      <PagesButtons />
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 
 defineOptions({
   name: 'HomeView',
 })
 
-const helloText = ref('')
-const devText = ref('')
+const helloText = 'Olá, eu sou Ranyel Cerracena!';
+const devText = 'Desenvolvedor Full Stack';
 
-const fullHelloText = 'Olá, eu sou Ranyel Cerracena'
-const fullDevText = 'Desenvolvedor Full Stack'
+onMounted(() => {
+  const hello = document.querySelector('.homeText');
+  const dev = document.querySelector('.devText');
 
-onMounted(async () => {
-  await animateTyping(helloText, fullHelloText)
-  await animateTyping(devText, fullDevText)
+  setTimeout(() => {
+    hello.classList.add('showText');
+  }, 10);
+
+  setTimeout(() => {
+    dev.classList.add('showText');
+  }, 600);
 })
-
-function animateTyping(targetRef, fullText) {
-  return new Promise((resolve) => {
-    let index = 0;
-    targetRef.value = '';
-
-    function step() {
-      if (index < fullText.length) {
-        targetRef.value += fullText.charAt(index);
-        index++;
-        setTimeout(step, 50);
-      } else {
-        resolve();
-      }
-    }
-    step();
-  });
-}
-
 </script>
 
 <style scoped>
 .home {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -59,12 +45,22 @@ function animateTyping(targetRef, fullText) {
   width: 100vw;
 }
 
-.home h1 {
-  font-size: 2rem;
-  text-align: center;
-  margin: 0;
+.home div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.homeText,
+.devText {
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.showText {
+  opacity: 1;
+}
 
 .lineBlink {
   display: inline-block;
@@ -72,6 +68,15 @@ function animateTyping(targetRef, fullText) {
   height: 35px;
   background-color: var(--color-text);
   animation: blink 1s infinite;
+}
+
+#dynamicFonts {
+  display: inline-block;
+  min-width: 220px;
+  min-height: 2.3rem;
+  text-align: center;
+  transition: font-family 0.5s ease-in-out;
+  font-size-adjust: 0.5;
 }
 
 @keyframes blink {
