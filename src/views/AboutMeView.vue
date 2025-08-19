@@ -2,7 +2,10 @@
   <div class="aboutMe">
     <section class="aboutMeContent">
       <div class="meCard">
-        <h3>Ranyel Cerracena</h3>
+        <h4 class="myName">Ranyel Cerracena</h4>
+        <div class="meContent">
+
+        </div>
       </div>
       <div class="mediaCard">
 
@@ -15,6 +18,7 @@
   </div>
 </template>
 <script setup>
+
 defineOptions({
   name: 'AboutMeView',
 });
@@ -23,7 +27,6 @@ defineOptions({
 .aboutMe {
   height: 100vh;
   width: 100vw;
-  background-color: transparent;
 }
 
 .aboutMeContent {
@@ -35,12 +38,27 @@ defineOptions({
 
 .meCard {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
   position: absolute;
-  top: 25%;
-  left: 25%;
-  width: 250px;
+  top: 10%;
+  left: 12%;
+  width: 600px;
+  height: 600px;
   border: 2px solid var(--color-background-soft);
   background-color: var(--color-background);
+  padding: 15px 0 0 0;
+}
+
+.meContent {
+  height: 93%;
+  width: 100%;
+  border-top: 2px solid var(--color-background-soft);
+}
+
+.myName{
+  font-family: "Rock Salt", cursive;
+  font-weight: bold;
 }
 </style>
