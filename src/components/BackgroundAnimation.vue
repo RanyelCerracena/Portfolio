@@ -1,12 +1,19 @@
 <template>
   <div class="backgroundLayer">
     <span class="blurLayer"></span>
-    <span class="animationSpan">
-      <span class="light"></span>
-    </span>
-    <span class="secondAnimationSpan">
-      <span class="light"></span>
-    </span>
+    <div class="homeAnimations">
+      <span class="animationSpan">
+        <span class="light"></span>
+      </span>
+      <span class="secondAnimationSpan">
+        <span class="light2"></span>
+      </span>
+    </div>
+    <div class="aboutAnimations">
+      <span class="circleAbout">
+        <span class=""></span>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -18,97 +25,109 @@ defineOptions({
 
 <style scoped>
 .backgroundLayer {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
   overflow: hidden;
-  z-index: 0;
+}
+
+.blurLayer{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.144);
+  z-index: 3;
+}
+
+.homeAnimations {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  z-index: 2;
+}
+
+.light, .light2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.5;
+  filter: blur(40px);
 }
 
 .animationSpan {
-  background-color: var(--circle-primary);
-  height: 25vw;
-  width: 25vw;
-  border-radius: 50%;
   position: absolute;
-  bottom: 10%;
+  top: 0;
   left: 0;
-  animation: CircleAnimation 20s ease-in-out infinite alternate;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-color: var(--vt-c-circle-primary-dark);
+  animation: move-and-pulse-1 60s infinite ease-in-out;
+  overflow: hidden;
   filter: blur(90px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  mix-blend-mode: screen;
-  z-index: 0;
 }
 
 .secondAnimationSpan {
-  background-color: var(--circle-secondary);
-  height: 25vw;
-  width: 25vw;
-  border-radius: 50%;
   position: absolute;
-  top: 10%;
+  bottom: 0;
   right: 0;
-  animation: SecondCircleAnimation 20s ease-in-out infinite alternate 0.4s;
-  filter: blur(90px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  mix-blend-mode: screen;
-  z-index: 0;
-}
-
-.light {
-  width: 30%;
-  height: 30%;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
-  background-color: #ffffff;
-  filter: blur(70px);
+  background-color: var(--vt-c-circle-primary-dark);
+  animation: move-and-pulse-2 65s infinite ease-in-out;
+  overflow: hidden;
+  filter: blur(90px);
+  transition: all 3s ease-in-out;
 }
 
-.blurLayer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
+@keyframes move-and-pulse-1 {
+  0% { transform: translate(0, 0) scale(1); }
+  20% { transform: translate(30vw, 10vh) scale(3); }
+  40% { transform: translate(10vw, 40vh) scale(0.9); }
+  60% { transform: translate(40vw, 70vh) scale(1.2); }
+  80% { transform: translate(20vw, 50vh) scale(2); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes move-and-pulse-2 {
+  0% { transform: translate(0, 0) scale(1); }
+  20% { transform: translate(-25vw, -10vh) scale(2); }
+  50% { transform: translate(-40vw, -40vh) scale(3); }
+  80% { transform: translate(-10vw, -60vh) scale(1.2); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.aboutAnimations{
+  position: relative;
   height: 100vh;
-  backdrop-filter: blur(250px);
-  background-color: #0000004f;
-  z-index: 1;
+  width: 100vw;
+  z-index: 2;
 }
 
-@keyframes CircleAnimation {
-  0% {
-    transform: translateX(0) scale(1);
-    opacity: 0;
-  }
-
-  50% {
-    transform: translateX(20vw) scale(1.05);
-    opacity: 0.6;
-  }
-
-  100% {
-    transform: translateX(40vw) scale(1);
-    opacity: 0.1;
-  }
+.circleAbout{
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: var(--about-scroll-color);
+  animation: aboutAnimation 60s infinite ease-in-out;
+  filter: blur(40px);
 }
 
-@keyframes SecondCircleAnimation {
-  0% {
-    transform: translateX(0) scale(1);
-    opacity: 0;
-  }
-
-  50% {
-    transform: translateX(-20vw) scale(1.05);
-    opacity: 0.6;
-  }
-
-  100% {
-    transform: translateX(-40vw) scale(1);
-    opacity: 0.1;
+@keyframes aboutAnimation {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  20% { transform: translate(-250%, -250%) scale(4); }
+  40% { transform: translate(250%, -320%) scale(3); }
+  60% { transform: translate(-50%, 250%) scale(4); }
+  80% { transform: translate(150%, -150%) scale(2); }
+  100% { transform: translate(-50%, -50%) scale(1);
   }
 }
 </style>

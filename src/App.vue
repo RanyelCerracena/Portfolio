@@ -1,29 +1,43 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
 import BackgroundAnimation from './components/BackgroundAnimation.vue'
 import TheHeader from './components/TheHeader.vue'
+import AboutMeView from './views/AboutMeView.vue'
+import HomeView from './views/HomeView.vue';
 </script>
 
 <template>
-  <main class="mainBg">
-    <TheHeader />
-    <RouterView />
-    <BackgroundAnimation class="bgAnimation" />
-  </main>
+  <div class="app">
+    <div class="mainBg">
+      <TheHeader />
+      <BackgroundAnimation class="bgAnimation" />
+    </div>
+    <HomeView />
+    <AboutMeView />
+  </div>
 </template>
 
 <style scoped>
+
+.app{
+display: flex;
+flex-direction: column;
+height: 100%;
+width: 99vw;
+overflow-x: hidden;
+}
 .mainBg {
-  height: 100vh;
-  width: 100vw;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 .bgAnimation {
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 500vh;
   z-index: -1;
 }
+
 </style>

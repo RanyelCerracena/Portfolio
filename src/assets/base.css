@@ -26,12 +26,13 @@
   --vt-c-circle-primary-dark: #20ac82;
   --vt-c-circle-secondary-dark: #10b948;
 
-  --text-shadow-light:
-    0 0 5px rgba(37, 186, 255, 0.603),
-    0 0 10px rgba(59, 130, 246, 0.2);
-  --text-shadow-dark:
-    0 0 8px rgba(141, 252, 169, 0.6),
-    0 0 15px rgba(169, 255, 187, 0.4);
+  --text-shadow-light: #25baff9a;
+  --text-shadow-dark: #8dfca999;
+
+  --about-scroll-color: #8e4bdb;
+  --projects-scroll-color: #d8a929;
+  --services-scroll-color: #ee4426;
+  --contact-scroll-color: #3284f0;
 }
 
 /* light theme - default */
@@ -68,10 +69,6 @@
   --text-glow: var(--text-shadow-dark);
   --circle-primary: var(--vt-c-circle-primary-dark);
   --circle-secondary: var(--vt-c-circle-secondary-dark);
-}
-
-.glow-text{
-  text-shadow: var(--text-glow);
 }
 
 /* base styles */

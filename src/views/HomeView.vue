@@ -3,20 +3,20 @@
     <h1 class="homeText">{{ helloText }}</h1>
     <h2 class="devText">{{ devText }}</h2>
 
-    <section class="sectionsButtons">
-      <PagesButtons />
+    <ScrollIndicator/>
   </div>
 </template>
 
 <script setup>
+import ScrollIndicator from '@/components/ScrollIndicator.vue';
 import { onMounted } from 'vue'
 
 defineOptions({
   name: 'HomeView',
 })
 
-const helloText = 'Olá, eu sou Ranyel Cerracena!';
-const devText = 'Desenvolvedor Full Stack';
+const helloText = "Hello, i'm Ranyel Cerracena";
+const devText = 'Full Stack developer';
 
 onMounted(() => {
   const hello = document.querySelector('.homeText');
@@ -34,15 +34,15 @@ onMounted(() => {
 
 <style scoped>
 .home {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 94vh;
-  width: 100vw;
+  width: 95vw;
+  height: 100vh;
+  margin: 0 auto;
+  z-index: 2;
 }
 
 .home div {
@@ -53,6 +53,7 @@ onMounted(() => {
 
 .homeText,
 .devText {
+  font-size: 2.5vw;
   text-align: center;
   opacity: 0;
   transition: opacity 0.8s ease-in-out;
@@ -70,18 +71,21 @@ onMounted(() => {
   animation: blink 1s infinite;
 }
 
-#dynamicFonts {
-  display: inline-block;
-  min-width: 220px;
-  min-height: 2.3rem;
-  text-align: center;
-  transition: font-family 0.5s ease-in-out;
-  font-size-adjust: 0.5;
+.sectionsButtons {
+  margin-top: 25px;
 }
 
-@keyframes blink {
-  50% {
-    background-color: transparent;
+@media (max-width: 834px) {
+  .homeText,
+  .devText {
+    font-size: 4vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .homeText,
+  .devText {
+    font-size: 5vw;
   }
 }
 </style>
