@@ -9,31 +9,31 @@
           <li :class="{ active: activeNavItem === 'home' }" @click="setActiveNavItem('home')">
             <router-link class="navItem home" to="/">
               <i class="bi bi-house"></i>
-              <span class="itemText">home</span>
+              <span class="itemText">início</span>
             </router-link>
           </li>
           <li :class="{ active: activeNavItem === 'about' }" @click="setActiveNavItem('about')">
             <router-link class="navItem about" to="/about">
               <i class="bi bi-person"></i>
-              <span class="itemText">about</span>
+              <span class="itemText">sobre</span>
             </router-link>
           </li>
           <li :class="{ active: activeNavItem === 'projects' }" @click="setActiveNavItem('projects')">
             <router-link class="navItem projects" to="/projects">
               <i class="bi bi-code-slash"></i>
-              <span class="itemText">projects</span>
+              <span class="itemText">projetos</span>
             </router-link>
           </li>
           <li :class="{ active: activeNavItem === 'services' }" @click="setActiveNavItem('services')">
             <router-link class="navItem services" to="/services">
               <i class="bi bi-briefcase"></i>
-              <span class="itemText">services</span>
+              <span class="itemText">serviços</span>
             </router-link>
           </li>
           <li :class="{ active: activeNavItem === 'contact' }" @click="setActiveNavItem('contact')">
             <router-link class="navItem contact" to="/contact">
               <i class="bi bi-envelope"></i>
-              <span class="itemText">contact</span>
+              <span class="itemText">contato</span>
             </router-link>
           </li>
         </ul>

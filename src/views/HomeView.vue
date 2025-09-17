@@ -15,8 +15,8 @@ defineOptions({
   name: 'HomeView',
 })
 
-const helloText = "Hello, i'm Ranyel Cerracena";
-const devText = 'Full Stack developer';
+const helloText = "Olá, eu sou Ranyel Cerracena";
+const devText = 'Desenvolvedor Full Stack';
 
 onMounted(() => {
   const hello = document.querySelector('.homeText');
