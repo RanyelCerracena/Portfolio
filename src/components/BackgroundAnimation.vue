@@ -11,7 +11,17 @@
     </div>
     <div class="aboutAnimations">
       <span class="circleAbout">
-        <span class=""></span>
+        <span></span>
+      </span>
+    </div>
+    <div class="projectAnimations">
+      <span class="circleProjects">
+        <span></span>
+      </span>
+    </div>
+    <div class="servicesAnimations">
+      <span class="circleServices">
+        <span></span>
       </span>
     </div>
   </div>
@@ -28,7 +38,7 @@ defineOptions({
   overflow: hidden;
 }
 
-.blurLayer{
+.blurLayer {
   position: absolute;
   top: 0;
   left: 0;
@@ -45,7 +55,8 @@ defineOptions({
   z-index: 2;
 }
 
-.light, .light2 {
+.light,
+.light2 {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -86,30 +97,61 @@ defineOptions({
 }
 
 @keyframes move-and-pulse-1 {
-  0% { transform: translate(0, 0) scale(1); }
-  20% { transform: translate(30vw, 10vh) scale(3); }
-  40% { transform: translate(10vw, 40vh) scale(0.9); }
-  60% { transform: translate(40vw, 70vh) scale(1.2); }
-  80% { transform: translate(20vw, 50vh) scale(2); }
-  100% { transform: translate(0, 0) scale(1); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  20% {
+    transform: translate(30vw, 10vh) scale(3);
+  }
+
+  40% {
+    transform: translate(10vw, 40vh) scale(0.9);
+  }
+
+  60% {
+    transform: translate(40vw, 70vh) scale(1.2);
+  }
+
+  80% {
+    transform: translate(20vw, 50vh) scale(2);
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
 }
 
 @keyframes move-and-pulse-2 {
-  0% { transform: translate(0, 0) scale(1); }
-  20% { transform: translate(-25vw, -10vh) scale(2); }
-  50% { transform: translate(-40vw, -40vh) scale(3); }
-  80% { transform: translate(-10vw, -60vh) scale(1.2); }
-  100% { transform: translate(0, 0) scale(1); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  20% {
+    transform: translate(-25vw, -10vh) scale(2);
+  }
+
+  50% {
+    transform: translate(-40vw, -40vh) scale(3);
+  }
+
+  80% {
+    transform: translate(-10vw, -60vh) scale(1.2);
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
 }
 
-.aboutAnimations{
+.aboutAnimations {
   position: relative;
   height: 100vh;
   width: 100vw;
   z-index: 2;
 }
 
-.circleAbout{
+.circleAbout {
   position: absolute;
   top: 80%;
   left: 50%;
@@ -122,12 +164,53 @@ defineOptions({
 }
 
 @keyframes aboutAnimation {
-  0% { transform: translate(-50%, -50%) scale(1); }
-  20% { transform: translate(-250%, -250%) scale(4); }
-  40% { transform: translate(250%, -320%) scale(3); }
-  60% { transform: translate(-50%, 250%) scale(4); }
-  80% { transform: translate(150%, -150%) scale(2); }
-  100% { transform: translate(-50%, -50%) scale(1);
+  0% {
+    transform: translate(-50%, -50%) scale(1);
   }
+
+  20% {
+    transform: translate(-250%, -250%) scale(4);
+  }
+
+  40% {
+    transform: translate(250%, -320%) scale(3);
+  }
+
+  60% {
+    transform: translate(-50%, 250%) scale(4);
+  }
+
+  80% {
+    transform: translate(150%, -150%) scale(2);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.projectAnimations{
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  z-index: 2;
+}
+
+.servicesAnimations {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  z-index: 2;
+}
+.circleServices {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: var(--services-scroll-color);
+  animation: servicesAnimation 60s infinite ease-in-out;
+  filter: blur(40px);
 }
 </style>

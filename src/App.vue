@@ -3,6 +3,8 @@ import BackgroundAnimation from './components/BackgroundAnimation.vue'
 import TheHeader from './components/TheHeader.vue'
 import AboutMeView from './views/AboutMeView.vue'
 import HomeView from './views/HomeView.vue';
+import ProjectsView from './views/ProjectsView.vue';
+import ServicesView from './views/ServicesView.vue';
 </script>
 
 <template>
@@ -13,6 +15,8 @@ import HomeView from './views/HomeView.vue';
     </div>
     <HomeView />
     <AboutMeView />
+    <ProjectsView />
+    <ServicesView />
   </div>
 </template>
 
