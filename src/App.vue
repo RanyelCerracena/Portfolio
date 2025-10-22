@@ -4,7 +4,6 @@ import TheHeader from './components/TheHeader.vue'
 import AboutMeView from './views/AboutMeView.vue'
 import HomeView from './views/HomeView.vue';
 import ProjectsView from './views/ProjectsView.vue';
-import ServicesView from './views/ServicesView.vue';
 </script>
 
 <template>
@@ -16,19 +15,18 @@ import ServicesView from './views/ServicesView.vue';
     <HomeView />
     <AboutMeView />
     <ProjectsView />
-    <ServicesView />
   </div>
 </template>
 
 <style scoped>
-
-.app{
-display: flex;
-flex-direction: column;
-height: 100%;
-width: 99vw;
-overflow-x: hidden;
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 99vw;
+  overflow-x: hidden;
 }
+
 .mainBg {
   position: absolute;
   height: 100%;
@@ -40,8 +38,7 @@ overflow-x: hidden;
   top: 0;
   left: 0;
   width: 100%;
-  height: 500vh;
+  height: 300vh;
   z-index: -1;
 }
-
 </style>

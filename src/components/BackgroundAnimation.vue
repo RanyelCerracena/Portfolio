@@ -14,11 +14,6 @@
         <span></span>
       </span>
     </div>
-    <div class="projectAnimations">
-      <span class="circleProjects">
-        <span></span>
-      </span>
-    </div>
     <div class="servicesAnimations">
       <span class="circleServices">
         <span></span>
@@ -209,8 +204,34 @@ defineOptions({
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background-color: var(--services-scroll-color);
+  background-color: var(--projects-scroll-color);
   animation: servicesAnimation 60s infinite ease-in-out;
   filter: blur(40px);
+}
+
+@keyframes servicesAnimation {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  20% {
+    transform: translate(-250%, -250%) scale(4);
+  }
+
+  40% {
+    transform: translate(250%, -320%) scale(3);
+  }
+
+  60% {
+    transform: translate(-50%, 250%) scale(4);
+  }
+
+  80% {
+    transform: translate(150%, -150%) scale(2);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 </style>

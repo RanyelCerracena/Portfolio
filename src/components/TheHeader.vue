@@ -24,12 +24,6 @@
               <span class="itemText">projetos</span>
             </router-link>
           </li>
-          <li :class="{ active: activeNavItem === 'services' }" @click="setActiveNavItem('services')">
-            <router-link class="navItem services" to="/services">
-              <i class="bi bi-briefcase"></i>
-              <span class="itemText">serviços</span>
-            </router-link>
-          </li>
           <li :class="{ active: activeNavItem === 'contact' }" @click="setActiveNavItem('contact')">
             <router-link class="navItem contact" to="/contact">
               <i class="bi bi-envelope"></i>
@@ -257,7 +251,7 @@ onMounted(() => {
   width: 100%;
   text-decoration: none;
   color: var(--color-text);
-  font-family: sans-serif;
+  font-family: "Open Sans", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1rem;
   transition:
     text-shadow 0.6s ease,
@@ -342,10 +336,6 @@ onMounted(() => {
 
 .projects:hover {
   text-shadow: 0 0 10px var(--projects-scroll-color);
-}
-
-.services:hover {
-  text-shadow: 0 0 10px var(--services-scroll-color);
 }
 
 .contact:hover {
