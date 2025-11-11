@@ -1,67 +1,121 @@
 <template>
-  <div class="projects-bg">
-    <section class="projectsCard">
-      <div class="projectsCardHeader">
-        <h1>Projetos</h1>
-        <BoxIconsComponents class="boxIcons"/>
+  <section class="projectContent">
+    <div class="flexTitle">
+      <h2 class="cardTitle">Projects</h2>
+    </div>
+    <section class="projects">
+      <div class="card">
+        <div class="cardHeader">
+          <h4 class="projectTitle">3D Printer Calculator</h4>
+        </div>
+        <div class="cardBody"></div>
       </div>
-      <div class="projectsCardBody">
-
+      <div class="card">
+        <div class="cardHeader">
+          <h4 class="projectTitle">Studio Ghibli Catalog</h4>
+        </div>
+        <div class="cardBody"></div>
+      </div>
+      <div class="card">
+        <div class="cardHeader">
+          <h4 class="projectTitle">DIO - Trilha .NET - Explorando a linguagem C#</h4>
+        </div>
+        <div class="cardBody"></div>
+      </div>
+      <div class="card">
+        <div class="cardHeader">
+          <h4 class="projectTitle">DIO - Trilha .NET - Fundamentos</h4>
+        </div>
+        <div class="cardBody"></div>
+      </div>
+      <div class="card">
+        <div class="cardHeader">
+          <h4 class="projectTitle">Validador EFD</h4>
+        </div>
+        <div class="cardBody"></div>
+      </div>
+      <div class="card">
+        <div class="cardHeader">
+          <h4 class="projectTitle">Aplicação CRUD</h4>
+        </div>
+        <div class="cardBody"></div>
       </div>
     </section>
-  </div>
+    <button class="card showMoreButton">Mostrar Mais</button>
+  </section>
 </template>
 
 <script setup>
-import BoxIconsComponents from '@/components/BoxIconsComponents.vue';
-
 defineOptions({
   name: 'ProjectsView',
-});
+})
 </script>
 
 <style scoped>
-.projects-bg {
-  height: 100vh;
-  width: 100vw;
+.projectContent {
+  height: auto;
+  width: 80dvw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.projects {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 15px;
+  gap: 20px;
+  align-items: center;
+  justify-items: center;
+}
+.card {
+  border-radius: 10px;
+  border: 2px solid #ffffff0a;
+  background-color: #ffffff17;
+  backdrop-filter: blur(250px);
+  width: 95%;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 2px solid #ffffff0a;
+}
+.cardTitle {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  margin: 0;
+  color: var(--color-text);
+}
+.projectTitle {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 600;
+  font-size: 25px;
+  margin: 0;
+  color: var(--color-text);
+}
+.flexTitle {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 15px 0;
 }
-
-.projectsCard{
-  background-color: #ffffff17;
-  backdrop-filter: blur(250px);
-  border: 2px solid #ffffff0a;
-  border-radius: 5px;
-  box-shadow: #ffffff17 0px 0px 5px;
-  width: 80%;
-  height: 90%;
-  margin: auto;
+.cardBody {
+  height: 200px;
 }
-
-.projectsCardHeader {
-  position: relative;
-  text-align: center;
-  padding: 20px;
-  color: white;
-  border-bottom: 2px solid #ffffff17;
-  display: flex;
-  justify-content: center;
-}
-
-.projectsCardHeader h1 {
-  height: 50px;
-  display: block;
-  font-family: 'Archivo Black', sans-serif;
-  font-size: 2.5rem;
-  margin: 0;
-}
-
-.boxIcons{
-  position: absolute;
-  right: 20px;
-  bottom: 35%;
-
+.showMoreButton{
+  margin: 20px auto;
+  width: auto;
+  padding: 10px 20px;
+  color: #ffffff;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
 }
 </style>

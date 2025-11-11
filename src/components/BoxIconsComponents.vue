@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'BoxIconsComponents'
+  name: 'BoxIconsComponents',
 }
 </script>
 

@@ -184,13 +184,6 @@ defineOptions({
   }
 }
 
-.projectAnimations{
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-  z-index: 2;
-}
-
 .servicesAnimations {
   position: relative;
   height: 100vh;
@@ -211,27 +204,45 @@ defineOptions({
 
 @keyframes servicesAnimation {
   0% {
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1) rotate(0deg) skew(0deg, 0deg);
+    opacity: 0.95;
+    filter: blur(40px);
   }
 
-  20% {
-    transform: translate(-250%, -250%) scale(4);
+  15% {
+    transform: translate(30%, -120%) scale(4) rotate(18deg) skew(10deg, -8deg);
+    opacity: 0.85;
+    filter: blur(28px);
   }
 
-  40% {
-    transform: translate(250%, -320%) scale(3);
+  30% {
+    transform: translate(-220%, -60%) scale(5) rotate(-30deg) skew(-12deg, 10deg);
+    opacity: 0.75;
+    filter: blur(52px);
   }
 
-  60% {
-    transform: translate(-50%, 250%) scale(4);
+  50% {
+    transform: translate(120%, 20%) scale(2.1) rotate(48deg) skew(25deg, -20deg);
+    opacity: 0.9;
+    filter: blur(18px);
   }
 
-  80% {
-    transform: translate(150%, -150%) scale(2);
+  70% {
+    transform: translate(-30%, 180%) scale(1) rotate(-40deg) skew(-18deg, 12deg);
+    opacity: 0.65;
+    filter: blur(64px);
+  }
+
+  85% {
+    transform: translate(60%, -40%) scale(1.5) rotate(22deg) skew(8deg, -6deg);
+    opacity: 0.98;
+    filter: blur(24px);
   }
 
   100% {
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1) rotate(0deg) skew(0deg, 0deg);
+    opacity: 0.95;
+    filter: blur(40px);
   }
 }
 </style>

@@ -1,15 +1,15 @@
 <template>
   <div class="scroll-indicator">
-      <div class="needle">
-        <div class="signal"></div>
-      </div>
+    <div class="needle">
+      <div class="signal"></div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "ScrollIndicator",
-};
+  name: 'ScrollIndicator',
+}
 </script>
 
 <style scoped>
@@ -42,7 +42,9 @@ export default {
   height: 9px;
   background: var(--about-scroll-color);
   border-radius: 2px;
-  box-shadow: 0 0 10px #974eeb, 0 0 20px #974eeb;
+  box-shadow:
+    0 0 10px #974eeb,
+    0 0 20px #974eeb;
   animation: descendLinear 2s linear infinite;
 }
 
@@ -62,5 +64,4 @@ export default {
     opacity: 0;
   }
 }
-
 </style>

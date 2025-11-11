@@ -1,34 +1,34 @@
 <template>
-  <div class="home">
+  <div class="home" id="home">
     <h1 class="homeText">{{ helloText }}</h1>
     <h2 class="devText">{{ devText }}</h2>
 
-    <ScrollIndicator/>
+    <ScrollIndicator />
   </div>
 </template>
 
 <script setup>
-import ScrollIndicator from '@/components/ScrollIndicator.vue';
+import ScrollIndicator from '@/components/ScrollIndicator.vue'
 import { onMounted } from 'vue'
 
 defineOptions({
   name: 'HomeView',
 })
 
-const helloText = "Olá, eu sou Ranyel Cerracena";
-const devText = 'Desenvolvedor Full Stack';
+const helloText = 'Olá, eu sou Ranyel Cerracena'
+const devText = 'Desenvolvedor Full Stack'
 
 onMounted(() => {
-  const hello = document.querySelector('.homeText');
-  const dev = document.querySelector('.devText');
+  const hello = document.querySelector('.homeText')
+  const dev = document.querySelector('.devText')
 
   setTimeout(() => {
-    hello.classList.add('showText');
-  }, 10);
+    hello.classList.add('showText')
+  }, 10)
 
   setTimeout(() => {
-    dev.classList.add('showText');
-  }, 600);
+    dev.classList.add('showText')
+  }, 600)
 })
 </script>
 

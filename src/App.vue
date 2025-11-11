@@ -2,8 +2,8 @@
 import BackgroundAnimation from './components/BackgroundAnimation.vue'
 import TheHeader from './components/TheHeader.vue'
 import AboutMeView from './views/AboutMeView.vue'
-import HomeView from './views/HomeView.vue';
-import ProjectsView from './views/ProjectsView.vue';
+import HomeView from './views/HomeView.vue'
+import ProjectsView from './views/ProjectsView.vue'
 </script>
 
 <template>
@@ -38,7 +38,7 @@ import ProjectsView from './views/ProjectsView.vue';
   top: 0;
   left: 0;
   width: 100%;
-  height: 300vh;
+  height: auto;
   z-index: -1;
 }
 </style>

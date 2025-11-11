@@ -1,9 +1,9 @@
 <template>
-  <div class="aboutMe">
+  <div class="aboutMe" id="about">
     <section class="aboutMeContent">
 
       <div class="card meCard">
-        <div class="cardHeader">
+        <div class="cardHeader meHeader">
           <h4 class="cardTitle">Sobre Mim</h4>
           <BoxIconsComponents/>
         </div>
@@ -13,35 +13,30 @@
               <img src="/Ranyel.jpeg" alt="Minha foto">
               <div class="cardBody workCard">
                 <div class="cardHeader workHeader">
-                  <h4 class="cardTitle">Emprego</h4>
-                  <BoxIconsComponents/>
+                  <h4 class="cardTitle">Trabalho</h4>
                 </div>
                 <div class="card jobCard">
                   <p>
-                    Atualmente, Formosa-Go
+                    Atualmente, Formosa-GO
                   </p>
-                  <p>Aberto para vagas <span class="action">remotas</span> para o Brasil <span
-                    class="fi fi-br"></span>, e vagas <span class="action">remotas</span>, <span
-                    class="action">híbridas</span> ou <span class="action">presenciais</span> para
-                    <span class="human">Brasíia</span></p>
+                  <p> Aberto para vagas remotas em todo o Brasil <span class="fi fi-br"></span> e presenciais negociáveis.</p>
                 </div>
               </div>
             </div>
             <div class="textContent">
               <div class="cardHeader meTextHeader">
                 <h4 class="cardTitle">Minha Trajetória</h4>
-                <BoxIconsComponents/>
               </div>
               <div class="card meTextContent">
                 <p>
-                  Meu nome é <span class="name">RANYEL CERRACENA</span>, desenvolvedor criativo de
+                  Meu nome é <span class="action">RANYEL CERRACENA</span>, desenvolvedor criativo de
                   software,
                   apaixonado em
                   transformar ideias em soluções digitais inteligentes. Comecei com a criação de
                   softwares para
                   desktop e, com o tempo, meu trabalho evoluiu para sistemas web, usando tecnologias
-                  como <span class="csharp">C#</span>,
-                  <span class="go">Golang</span>, <span class="vue">Vue.js</span>. Hoje, meu foco
+                  como <span class="action">C#</span>,
+                  <span class="action">Golang</span>, <span class="action">Vue.js</span>. Hoje, meu foco
                   está em abraçar
                   <span class="action">projetos</span> e <span class="action">oportunidades</span>
                   que desafiem meus
@@ -53,7 +48,7 @@
                   combinar eficiência, inovação e organização.
                 </p>
                 <p>
-                  <span class="human">Enxergo cada projeto como uma tela em branco.</span> Gosto de
+                  <span class="action">Enxergo cada projeto como uma tela em branco.</span> Gosto de
                   usar minha
                   criatividade
                   para
@@ -66,22 +61,21 @@
                   design,
                   prestando
                   atenção aos detalhes para que os sistemas não sejam apenas eficientes, mas também
-                  <span class="human">visualmente harmoniosos e intuitivos</span>.
+                  <span class="action">visualmente harmoniosos e intuitivos</span>.
                 </p>
                 <p>
                   Sou movido pela curiosidade, estou sempre aprendendo novas <span class="action">linguagens</span>,
-                  <span class="action">frameworks</span> e <span class="human">metodologias</span>.
+                  <span class="action">frameworks</span> e <span class="action">metodologias</span>.
                   <span class="action">Profissionalismo, inovação</span> e sensibilidade estética
                   são os pilares que
                   guiam
-                  meu trabalho. Acredito que é essa combinação que <span class="human">me permite criar soluções que
+                  meu trabalho. Acredito que é essa combinação que <span class="action">me permite criar soluções que
                       realmente
                       fazem a diferença.</span>
                 </p>
                 <div class="mediaContent">
                   <div class="cardHeader mediasHeader">
                     <h4 class="cardTitle">Redes Sociais</h4>
-                    <BoxIconsComponents/>
                   </div>
                   <div class="card mediasCard">
                     <a href="https://github.com/RanyelCerracena"><i class="bi bi-github"></i></a>
@@ -91,7 +85,8 @@
                       class="bi bi-instagram"></i></a>
                     <a href="https://www.youtube.com/@RanyelCerracena"><i
                       class="bi bi-youtube"></i></a>
-                  </div>
+                    <a href="https://www.tiktok.com/@RanyelCerracena"><i class="bi bi-tiktok"></i></a>
+                    </div>
                 </div>
               </div>
             </div>
@@ -123,7 +118,6 @@ defineOptions({
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
 }
 
 .card {
@@ -142,13 +136,18 @@ defineOptions({
   justify-content: space-between;
   width: 100%;
   padding: 12px 20px;
-  border: 2px solid var(--color-background-soft);
+  border: 2px solid #ffffff0a;
+}
+.meHeader{
+  border-left: none;
+  border-right: none;
+  border-top: none;
 }
 
 .cardTitle {
-  font-family: "Open Sans", sans-serif;
-  font-weight: bold;
-  font-size: 20px;
+  font-family: "Urbanist", sans-serif;
+  font-weight: 700;
+  font-size: 25px;
   margin: 0;
   color: var(--color-text);
 }
@@ -168,6 +167,19 @@ defineOptions({
   height: 65dvh;
 }
 
+.mainCard p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+.meCard{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #ffffff17;
+  backdrop-filter: blur(250px);
+  width: 70dvw;
+}
+
 .flexContent {
   display: flex;
   width: 70dvw;
@@ -182,6 +194,8 @@ defineOptions({
 
 .meTextHeader {
   border-radius: 5px 5px 0 0;
+  width: 100%;
+  border-bottom: none;
 }
 
 .workHeader {
@@ -202,10 +216,13 @@ defineOptions({
   border-radius: 0 0 5px 5px;
   border-top: 0;
   padding: 15px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  gap: 10px;
+  height: 87.7%;
+  background-color: transparent;
+  border: 2px solid #ffffff0a;
 }
 
 .workCard {
@@ -216,8 +233,10 @@ defineOptions({
 .jobCard {
   height: 100%;
   border-radius: 0 0 5px 5px;
-  border-top: 0;
-  padding: 15px;
+  padding: 15px 15px 30px 15px;
+  background-color: transparent;
+  border: 2px solid #ffffff0a;
+  border-top: none;
 }
 
 .mediasHeader {
@@ -229,49 +248,41 @@ defineOptions({
 .mediasCard {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  font-size: 45px;
+  font-size: 36px;
   border-top: 0;
   width: 100%;
+  gap: 15px;
+  padding: 15px;
+  background-color: transparent;
+  border: 2px solid #ffffff0a;
+  border-top: none;
+}
+
+.mediasCard a{
+  color: var(--color-text);
+}
+
+.mediasCard a:hover {
+  margin: 0 15px;
+  scale: 1.5;
+  background-color: transparent;
+  color: var(--color-text);
+  text-shadow: 0 0px 8px #1ABC9C;
 }
 
 .mediaContent{
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.csharp {
-  color: #4E2ACD;
-  font-weight: bold;
-}
-
-.go {
-  color: #00A7D0;
-  font-weight: bold;
-}
-
-.vue {
-  color: #42B883;
-  font-weight: bold;
-}
-
-.name {
-  font-family: 'JetBrains Mono', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #7bd118;
-  font-weight: bold;
+  margin-top: 45px;
 }
 
 .action {
   color: #1ABC9C;
-  font-weight: bold;
-}
-
-.human {
-  color: #E2725B;
   font-weight: bold;
 }
 

@@ -7,25 +7,28 @@
       <nav class="navLinks" @mouseenter="mouseInside = true" @mouseleave="mouseInside = false">
         <ul class="navList">
           <li :class="{ active: activeNavItem === 'home' }" @click="setActiveNavItem('home')">
-            <router-link class="navItem home" to="/">
+            <router-link class="navItem home" to="/#home">
               <i class="bi bi-house"></i>
               <span class="itemText">início</span>
             </router-link>
           </li>
           <li :class="{ active: activeNavItem === 'about' }" @click="setActiveNavItem('about')">
-            <router-link class="navItem about" to="/about">
+            <router-link class="navItem about" to="/#about">
               <i class="bi bi-person"></i>
               <span class="itemText">sobre</span>
             </router-link>
           </li>
-          <li :class="{ active: activeNavItem === 'projects' }" @click="setActiveNavItem('projects')">
-            <router-link class="navItem projects" to="/projects">
+          <li
+            :class="{ active: activeNavItem === 'projects' }"
+            @click="setActiveNavItem('projects')"
+          >
+            <router-link class="navItem projects" to="/#projects">
               <i class="bi bi-code-slash"></i>
               <span class="itemText">projetos</span>
             </router-link>
           </li>
           <li :class="{ active: activeNavItem === 'contact' }" @click="setActiveNavItem('contact')">
-            <router-link class="navItem contact" to="/contact">
+            <router-link class="navItem contact" to="/#contact">
               <i class="bi bi-envelope"></i>
               <span class="itemText">contato</span>
             </router-link>
@@ -34,14 +37,12 @@
       </nav>
       <nav class="additionalButtons">
         <button @click="toggleTheme" class="theme-toggle">
-        <i :class="['bi', isDark ? 'bi-sun' : 'bi-moon']"></i>
-      </button>
-      <i class="bi bi-translate"></i>
+          <i :class="['bi', isDark ? 'bi-sun' : 'bi-moon']"></i>
+        </button>
+        <i class="bi bi-translate"></i>
       </nav>
     </aside>
-    <section class="topHeader">
-
-    </section>
+    <section class="topHeader"></section>
   </main>
 </template>
 
@@ -127,42 +128,39 @@ onMounted(() => {
   updateTheme()
 
   function updateActiveSlash() {
-    const navItems = document.querySelectorAll('.navItem .itemText');
-    navItems.forEach(item => {
-      item.textContent = item.textContent.replace(/ \/$/, '');
-    });
-    const active = document.querySelector('.navItem.active .itemText');
+    const navItems = document.querySelectorAll('.navItem .itemText')
+    navItems.forEach((item) => {
+      item.textContent = item.textContent.replace(/ \/$/, '')
+    })
+    const active = document.querySelector('.navItem.active .itemText')
     if (active) {
-      active.textContent = active.textContent.trim() + ' /';
+      active.textContent = active.textContent.trim() + ' /'
     }
   }
 
-  const navLinks = document.querySelectorAll('.navItem');
-  navLinks.forEach(item => {
+  const navLinks = document.querySelectorAll('.navItem')
+  navLinks.forEach((item) => {
     item.addEventListener('click', () => {
-      navLinks.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      updateActiveSlash();
-    });
-  });
+      navLinks.forEach((i) => i.classList.remove('active'))
+      item.classList.add('active')
+      updateActiveSlash()
+    })
+  })
 
   setTimeout(() => {
-    const current = document.querySelector(`.navItem[to="${location.pathname}"]`);
+    const current = document.querySelector(`.navItem[to="${location.pathname}"]`)
     if (current) {
-      navLinks.forEach(i => i.classList.remove('active'));
-      current.classList.add('active');
-      updateActiveSlash();
+      navLinks.forEach((i) => i.classList.remove('active'))
+      current.classList.add('active')
+      updateActiveSlash()
     } else {
       if (navLinks.length > 0) {
-        navLinks.forEach(i => i.classList.remove('active'));
-        navLinks[0].classList.add('active');
-        updateActiveSlash();
+        navLinks.forEach((i) => i.classList.remove('active'))
+        navLinks[0].classList.add('active')
+        updateActiveSlash()
       }
     }
-
-
-  });
-
+  })
 
   onMounted(() => {
     const savedTheme = localStorage.getItem('theme')
@@ -173,7 +171,7 @@ onMounted(() => {
     }
     updateTheme()
   })
-});
+})
 </script>
 
 <style scoped>
@@ -251,14 +249,13 @@ onMounted(() => {
   width: 100%;
   text-decoration: none;
   color: var(--color-text);
-  font-family: "Open Sans", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1rem;
   transition:
     text-shadow 0.6s ease,
     color 0.3s ease;
   background-color: transparent;
 }
-
 
 .navItem i {
   font-size: 25px;
@@ -268,7 +265,6 @@ onMounted(() => {
 .navItem span {
   font-size: 25px;
 }
-
 
 .itemText {
   padding: 0px 10px;
@@ -286,7 +282,7 @@ onMounted(() => {
   text-shadow: 0 0 10px var(--vt-c-circle-primary-dark);
 }
 
-.sideBar.expanded+.routerContainer {
+.sideBar.expanded + .routerContainer {
   margin-left: 250px;
 }
 
@@ -299,7 +295,6 @@ onMounted(() => {
   gap: 10px;
   padding: 10px 0;
 }
-
 
 .theme-toggle {
   background: none;
@@ -316,8 +311,9 @@ onMounted(() => {
 
 .bi-sun,
 .bi-moon {
-  transition: transform 0.3s ease,
-              text-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    text-shadow 0.3s ease;
 }
 
 .bi-sun:hover,
@@ -326,7 +322,7 @@ onMounted(() => {
   text-shadow: 0 0 10px var(--vt-c-circle-primary-dark);
 }
 
-.home:hover{
+.home:hover {
   text-shadow: 0 0 10px var(--vt-c-circle-primary-dark);
 }
 
@@ -342,9 +338,7 @@ onMounted(() => {
   text-shadow: 0 0 10px var(--contact-scroll-color);
 }
 
-
 @media (max-width: 768px) {
-
   .navItem i,
   .navItem span {
     font-size: 4vw;
