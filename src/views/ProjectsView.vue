@@ -1,14 +1,18 @@
 <template>
   <section class="projectContent">
     <div class="flexTitle">
-      <h2 class="cardTitle">Projects</h2>
+      <h2 class="cardTitle">Projetos</h2>
     </div>
     <section class="projects">
       <div class="card">
         <div class="cardHeader">
           <h4 class="projectTitle">3D Printer Calculator</h4>
         </div>
-        <div class="cardBody"></div>
+        <div class="cardBody">
+          <aside class="projectImg">
+
+          </aside>
+        </div>
       </div>
       <div class="card">
         <div class="cardHeader">
@@ -108,6 +112,7 @@ defineOptions({
 }
 .cardBody {
   height: 200px;
+  display: flex;
 }
 .showMoreButton{
   margin: 20px auto;
@@ -117,5 +122,6 @@ defineOptions({
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 18px;
+  cursor: pointer;
 }
 </style>
