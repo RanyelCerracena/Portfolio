@@ -5,7 +5,8 @@
 }
 
 html, body, #app {
-  cursor: var(--normal-cursor);
+  /* Use default cursor behavior to avoid custom cursor issues */
+  cursor: auto;
 }
 
 a,

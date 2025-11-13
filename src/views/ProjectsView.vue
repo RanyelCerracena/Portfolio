@@ -122,6 +122,6 @@ defineOptions({
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 18px;
-  cursor: var(--hover-cursor) 16 16, auto;
+  cursor: pointer; /* standard pointer for buttons */
 }
 </style>

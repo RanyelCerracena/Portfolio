@@ -4,18 +4,37 @@
       <nav class="navBar" :style="{ height: isFullScreen ? 'calc(6vh - 2px)' : '6vh' }">
         <h1 class="rcLogo">{{ displayName }}</h1>
       </nav>
-
       <nav class="navLinks" @mouseenter="mouseInside = true" @mouseleave="mouseInside = false">
         <ul class="navList">
-          <li v-for="item in navItems" :key="item.name" :class="{ active: activeNavItem === item.name }" @click="setActiveNavItem(item.name)">
-            <router-link :class="['navItem', item.name]" :to="item.to">
-              <i :class="['bi', item.icon]"></i>
-              <span class="itemText">{{ item.text }}</span>
+          <li :class="{ active: activeNavItem === 'home' }" @click="setActiveNavItem('home')">
+            <router-link class="navItem home" to="/#home">
+              <i class="bi bi-house"></i>
+              <span class="itemText">início</span>
+            </router-link>
+          </li>
+          <li :class="{ active: activeNavItem === 'about' }" @click="setActiveNavItem('about')">
+            <router-link class="navItem about" to="/#about">
+              <i class="bi bi-person"></i>
+              <span class="itemText">sobre</span>
+            </router-link>
+          </li>
+          <li
+            :class="{ active: activeNavItem === 'projects' }"
+            @click="setActiveNavItem('projects')"
+          >
+            <router-link class="navItem projects" to="/#projects">
+              <i class="bi bi-code-slash"></i>
+              <span class="itemText">projetos</span>
+            </router-link>
+          </li>
+          <li :class="{ active: activeNavItem === 'contact' }" @click="setActiveNavItem('contact')">
+            <router-link class="navItem contact" to="/#contact">
+              <i class="bi bi-envelope"></i>
+              <span class="itemText">contato</span>
             </router-link>
           </li>
         </ul>
       </nav>
-
       <nav class="additionalButtons">
         <button @click="toggleTheme" class="theme-toggle">
           <i :class="['bi', isDark ? 'bi-sun' : 'bi-moon']"></i>
@@ -30,22 +49,17 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
 
-defineOptions({ name: 'TheHeader' })
+defineOptions({
+  name: 'TheHeader',
+})
 
 const activeNavItem = ref('home')
 const mouseInside = ref(false)
 const displayName = ref('RC')
 
-const fullName = 'Ranyel Cerracena'
-const shortName = 'RC'
+let fullName = 'Ranyel Cerracena'
+let shortName = 'RC'
 let typingTimout
-
-const navItems = [
-  { name: 'home', icon: 'bi-house', text: 'início', to: '/#home' },
-  { name: 'about', icon: 'bi-person', text: 'sobre', to: '/#about' },
-  { name: 'projects', icon: 'bi-code-slash', text: 'projetos', to: '/#projects' },
-  { name: 'contact', icon: 'bi-envelope', text: 'contato', to: '/#contact' },
-]
 
 function setActiveNavItem(item) {
   activeNavItem.value = item
@@ -53,7 +67,11 @@ function setActiveNavItem(item) {
 
 watch(mouseInside, (expanded) => {
   clearTimeout(typingTimout)
-  animateTyping(expanded ? shortName : fullName, expanded ? fullName : shortName)
+  if (expanded) {
+    animateTyping(shortName, fullName)
+  } else {
+    animateTyping(fullName, shortName)
+  }
 })
 
 function animateTyping(from, to) {
@@ -62,37 +80,97 @@ function animateTyping(from, to) {
   displayName.value = from
 
   function step() {
-    if (deleting && displayName.value.length > 0) {
-      displayName.value = displayName.value.slice(0, -1)
-      typingTimout = setTimeout(step, 20)
-    } else if (deleting) {
-      deleting = false
-      step()
-    } else if (index < to.length) {
-      displayName.value += to.charAt(index++)
-      typingTimout = setTimeout(step, 30)
+    if (deleting) {
+      if (displayName.value.length > 0) {
+        displayName.value = displayName.value.slice(0, -1)
+        typingTimout = setTimeout(step, 20)
+      } else {
+        deleting = false
+        step()
+      }
+    } else {
+      if (index < to.length) {
+        displayName.value += to.charAt(index)
+        index++
+        typingTimout = setTimeout(step, 30)
+      }
     }
   }
+
   step()
 }
 
 const isDark = ref(false)
 const isFullScreen = ref(false)
 
-function toggleTheme() {
+const toggleTheme = () => {
   isDark.value = !isDark.value
   updateTheme()
 }
 
-function updateTheme() {
-  document.documentElement.classList.toggle('dark', isDark.value)
-  localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
+const updateTheme = () => {
+  if (isDark.value) {
+    document.documentElement.classList.add('dark')
+    localStorage.setItem('theme', 'dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+    localStorage.setItem('theme', 'light')
+  }
 }
 
 onMounted(() => {
-  const saved = localStorage.getItem('theme')
-  isDark.value = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
+  const savedTheme = localStorage.getItem('theme')
+  if (savedTheme) {
+    isDark.value = savedTheme === 'dark'
+  } else {
+    isDark.value = window.matchMedia('(prefers-color-scheme: dark)').matches
+  }
   updateTheme()
+
+  function updateActiveSlash() {
+    const navItems = document.querySelectorAll('.navItem .itemText')
+    navItems.forEach((item) => {
+      item.textContent = item.textContent.replace(/ \/$/, '')
+    })
+    const active = document.querySelector('.navItem.active .itemText')
+    if (active) {
+      active.textContent = active.textContent.trim() + ' /'
+    }
+  }
+
+  const navLinks = document.querySelectorAll('.navItem')
+  navLinks.forEach((item) => {
+    item.addEventListener('click', () => {
+      navLinks.forEach((i) => i.classList.remove('active'))
+      item.classList.add('active')
+      updateActiveSlash()
+    })
+  })
+
+  setTimeout(() => {
+    const current = document.querySelector(`.navItem[to="${location.pathname}"]`)
+    if (current) {
+      navLinks.forEach((i) => i.classList.remove('active'))
+      current.classList.add('active')
+      updateActiveSlash()
+    } else {
+      if (navLinks.length > 0) {
+        navLinks.forEach((i) => i.classList.remove('active'))
+        navLinks[0].classList.add('active')
+        updateActiveSlash()
+      }
+    }
+  })
+
+  onMounted(() => {
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme) {
+      isDark.value = savedTheme === 'dark'
+    } else {
+      isDark.value = window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+    updateTheme()
+  })
 })
 </script>
 
@@ -112,21 +190,23 @@ onMounted(() => {
   background-color: #ffffff17;
   backdrop-filter: blur(10px);
   transition: width 0.5s ease-in-out;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: start;
   box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
   z-index: 10;
-  overflow: hidden;
 }
 
 .sideBar.expanded {
   width: 250px;
 }
 
-.rcLogo {
+.sideBar h1 {
+  display: inline-block;
   font-family: 'Manufacturing Consent', sans-serif;
   font-size: 1.5rem;
+  position: fixed;
   width: 100%;
   text-align: center;
   line-height: 58px;
@@ -137,13 +217,15 @@ onMounted(() => {
 
 .navBar {
   height: 6.5dvh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .navLinks {
-  flex: 1;
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,10 +234,11 @@ onMounted(() => {
 .navList {
   list-style: none;
   margin-top: 2rem;
+  width: 100%;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 100%;
 }
 
 .navItem {
@@ -163,13 +246,19 @@ onMounted(() => {
   align-items: center;
   gap: 15px;
   padding: 10px 15px;
+  width: 100%;
+  text-decoration: none;
   color: var(--color-text);
   font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1rem;
-  transition: text-shadow 0.6s ease, color 0.3s ease;
-  text-decoration: none;
+  transition:
+    text-shadow 0.6s ease,
+    color 0.3s ease;
   background-color: transparent;
-  cursor: var(--hover-cursor) 14 1, pointer;
+}
+
+.navItem i {
+  font-size: 25px;
 }
 
 .navItem i,
@@ -178,31 +267,40 @@ onMounted(() => {
 }
 
 .itemText {
-  padding: 0 10px;
-  white-space: nowrap;
+  padding: 0px 10px;
+  text-wrap: nowrap;
+}
+
+.bi.bi-translate {
+  font-size: 25px;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.bi.bi-translate:hover {
+  text-shadow: 0 0 10px var(--vt-c-circle-primary-dark);
+}
+
+.sideBar.expanded + .routerContainer {
+  margin-left: 250px;
 }
 
 .additionalButtons {
-  width: 55px;
   display: flex;
+  width: 55px;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   padding: 10px 0;
-}
-
-.theme-toggle,
-.additionalButtons .bi,
-.navItem,
-button,
-a {
-  cursor: var(--hover-cursor) 14 1, pointer;
 }
 
 .theme-toggle {
   background: none;
   border: none;
   color: var(--color-text);
+  cursor: pointer;
   font-size: 1.25rem;
   transition: color 0.3s ease;
 }
@@ -213,7 +311,9 @@ a {
 
 .bi-sun,
 .bi-moon {
-  transition: transform 0.3s ease, text-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    text-shadow 0.3s ease;
 }
 
 .bi-sun:hover,
@@ -222,20 +322,20 @@ a {
   text-shadow: 0 0 10px var(--vt-c-circle-primary-dark);
 }
 
-.home:hover { text-shadow: 0 0 10px var(--vt-c-circle-primary-dark); }
-.about:hover { text-shadow: 0 0 10px var(--about-scroll-color); }
-.projects:hover { text-shadow: 0 0 10px var(--projects-scroll-color); }
-.contact:hover { text-shadow: 0 0 10px var(--contact-scroll-color); }
-
-.bi.bi-translate {
-  font-size: 25px;
-  color: var(--color-text);
-  transition: box-shadow 0.3s ease;
-  width: 100%;
-  text-align: center;
-}
-.bi.bi-translate:hover {
+.home:hover {
   text-shadow: 0 0 10px var(--vt-c-circle-primary-dark);
+}
+
+.about:hover {
+  text-shadow: 0 0 10px var(--about-scroll-color);
+}
+
+.projects:hover {
+  text-shadow: 0 0 10px var(--projects-scroll-color);
+}
+
+.contact:hover {
+  text-shadow: 0 0 10px var(--contact-scroll-color);
 }
 
 @media (max-width: 768px) {
@@ -244,9 +344,11 @@ a {
     font-size: 4vw;
     margin-left: 4px;
   }
+
   .navBar {
     min-height: 48px;
     max-height: 64px;
+    line-height: 6vh;
   }
 }
 </style>

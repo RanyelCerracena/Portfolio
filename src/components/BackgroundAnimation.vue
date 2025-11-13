@@ -41,7 +41,8 @@ defineOptions({
   height: 100%;
   background-color: rgba(0, 0, 0, 0.144);
   z-index: 3;
-  cursor: var(--normal-cursor);
+  /* keep default cursor for background layers */
+  cursor: auto;
 }
 
 .homeAnimations {
