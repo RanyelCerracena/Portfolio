@@ -33,13 +33,11 @@
   --projects-scroll-color: #d8a929;
   --services-scroll-color: #ee4426;
   --contact-scroll-color: #3284f0;
-
-  /* removed custom cursor images to avoid cursor styling issues */
 }
 
 /* light theme - default */
 :root {
-  /* custom cursor variables removed */
+
   --color-circle-primary: var(--vt-c-circle-primary);
   --color-circle-secondary: var(--vt-c-circle-secondary);
   --color-background: var(--vt-c-white);
@@ -58,7 +56,7 @@
 
 /* dark theme */
 .dark {
-  /* custom cursor variables removed for dark theme */
+
   --color-circle-primaryDark: #60a5fa;
   --color-circle-secondaryDark: #34d399;
   --color-background: var(--vt-c-black);

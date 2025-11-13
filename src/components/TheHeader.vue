@@ -274,7 +274,6 @@ onMounted(() => {
 .bi.bi-translate {
   font-size: 25px;
   color: var(--color-text);
-  cursor: pointer;
   transition: box-shadow 0.3s ease;
 }
 
@@ -300,7 +299,6 @@ onMounted(() => {
   background: none;
   border: none;
   color: var(--color-text);
-  cursor: pointer;
   font-size: 1.25rem;
   transition: color 0.3s ease;
 }

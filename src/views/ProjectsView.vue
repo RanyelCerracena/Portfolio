@@ -122,6 +122,5 @@ defineOptions({
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 18px;
-  cursor: pointer; /* standard pointer for buttons */
 }
 </style>
