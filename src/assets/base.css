@@ -33,10 +33,17 @@
   --projects-scroll-color: #d8a929;
   --services-scroll-color: #ee4426;
   --contact-scroll-color: #3284f0;
+
+  --normal-cursor-light: url('../assets/cursors/Arrow-dark.png');
+  --hover-cursor-light: url('../assets/cursors/Hand-dark.png');
+  --normal-cursor-dark: url('../assets/cursors/Arrow-light.png');
+  --hover-cursor-dark: url('../assets/cursors/Hand-light.png');
 }
 
 /* light theme - default */
 :root {
+  --normal-cursor: var(--normal-cursor-light);
+  --hover-cursor: var(--hover-cursor-light);
   --color-circle-primary: var(--vt-c-circle-primary);
   --color-circle-secondary: var(--vt-c-circle-secondary);
   --color-background: var(--vt-c-white);
@@ -55,6 +62,8 @@
 
 /* dark theme */
 .dark {
+  --normal-cursor: var(--normal-cursor-dark);
+  --hover-cursor: var(--hover-cursor-dark);
   --color-circle-primaryDark: #60a5fa;
   --color-circle-secondaryDark: #34d399;
   --color-background: var(--vt-c-black);

@@ -4,6 +4,10 @@
   overflow: hidden;
 }
 
+html, body, #app {
+  cursor: var(--normal-cursor);
+}
+
 a,
 .green {
   text-decoration: none;
