@@ -35,7 +35,7 @@
   --contact-scroll-color: #3284f0;
 }
 
-/* light theme - default */
+/* light theme */
 :root {
 
   --color-circle-primary: var(--vt-c-circle-primary);
@@ -49,6 +49,8 @@
   --color-text: var(--vt-c-text-light-1);
   --color-text-secondary: var(--vt-c-text-light-2);
 
+  --normal-cursor: var(--normal-cursor-light);
+  --hover-cursor: var(--hover-cursor-light);
   --text-glow: var(--text-shadow-light);
   --circle-primary: var(--vt-c-circle-primary-light);
   --circle-secondary: var(--vt-c-circle-secondary-light);
@@ -68,6 +70,8 @@
   --color-text: var(--vt-c-text-dark-2);
   --color-text-secondary: var(--vt-c-text-dark-2);
 
+  --normal-cursor: var(--normal-cursor-dark);
+  --hover-cursor: var(--hover-cursor-dark);
   --text-glow: var(--text-shadow-dark);
   --circle-primary: var(--vt-c-circle-primary-dark);
   --circle-secondary: var(--vt-c-circle-secondary-dark);
