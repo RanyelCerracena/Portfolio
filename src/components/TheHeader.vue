@@ -293,6 +293,7 @@ onMounted(() => {
   justify-content: center;
   gap: 10px;
   padding: 10px 0;
+  cursor: pointer;
 }
 
 .theme-toggle {
@@ -312,6 +313,7 @@ onMounted(() => {
   transition:
     transform 0.3s ease,
     text-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .bi-sun:hover,

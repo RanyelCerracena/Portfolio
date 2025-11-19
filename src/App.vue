@@ -22,7 +22,7 @@ import ProjectsView from './views/ProjectsView.vue'
 .app {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 400dvh;
   width: 99vw;
   overflow-x: hidden;
 }

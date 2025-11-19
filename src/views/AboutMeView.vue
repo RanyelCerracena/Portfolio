@@ -22,6 +22,21 @@
                   <p> Aberto para vagas remotas em todo o Brasil <span class="fi fi-br"></span> e presenciais negociáveis.</p>
                 </div>
               </div>
+              <div class="mediaContent">
+                  <div class="cardHeader mediasHeader">
+                    <h4 class="cardTitle">Redes Sociais</h4>
+                  </div>
+                  <div class="card mediasCard">
+                    <a href="https://github.com/RanyelCerracena"><i class="bi bi-github"></i></a>
+                    <a href="https://www.linkedin.com/in/ranyel-cerracena/"><i
+                      class="bi bi-linkedin"></i></a>
+                    <a href="https://www.instagram.com/ranyel.cerracena/"><i
+                      class="bi bi-instagram"></i></a>
+                    <a href="https://www.youtube.com/@RanyelCerracena"><i
+                      class="bi bi-youtube"></i></a>
+                    <a href="https://www.tiktok.com/@RanyelCerracena"><i class="bi bi-tiktok"></i></a>
+                    </div>
+                </div>
             </div>
             <div class="textContent">
               <div class="cardHeader meTextHeader">
@@ -73,21 +88,6 @@
                       realmente
                       fazem a diferença.</span>
                 </p>
-                <div class="mediaContent">
-                  <div class="cardHeader mediasHeader">
-                    <h4 class="cardTitle">Redes Sociais</h4>
-                  </div>
-                  <div class="card mediasCard">
-                    <a href="https://github.com/RanyelCerracena"><i class="bi bi-github"></i></a>
-                    <a href="https://www.linkedin.com/in/ranyel-cerracena/"><i
-                      class="bi bi-linkedin"></i></a>
-                    <a href="https://www.instagram.com/ranyel.cerracena/"><i
-                      class="bi bi-instagram"></i></a>
-                    <a href="https://www.youtube.com/@RanyelCerracena"><i
-                      class="bi bi-youtube"></i></a>
-                    <a href="https://www.tiktok.com/@RanyelCerracena"><i class="bi bi-tiktok"></i></a>
-                    </div>
-                </div>
               </div>
             </div>
           </div>
@@ -164,7 +164,6 @@ defineOptions({
 
 .mainCard {
   width: 70dvw;
-  height: 65dvh;
 }
 
 .mainCard p {
@@ -278,7 +277,6 @@ defineOptions({
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 45px;
 }
 
 .action {
