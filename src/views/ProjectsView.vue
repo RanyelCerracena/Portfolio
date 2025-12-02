@@ -10,8 +10,10 @@
           <button class="buttons">Ver Projeto</button>
           <div>
             <span>Habilidades Técnicas</span>
-            <ul>
+            <ul class="tecSkills">
               <li>C#</li>
+              <li>Minimal Api's</li>
+              <li>POO</li>
               <li>Vue.Js</li>
             </ul>
           </div>
@@ -28,32 +30,9 @@ defineOptions({
 })
 </script>
 
-<style scoped>
-.card {
-  border-radius: 10px;
-  border: 2px solid var(--color-background-soft);
-  background-color: #ffffff17;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-.cardHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 20px;
-  border-bottom: 2px solid #ffffff0a;
-}
+<style>
 .flexTitle{
   text-align: center;
-}
-.cardTitle {
-  font-family: 'Urbanist', sans-serif;
-  font-weight: 700;
-  font-size: 40px;
-  margin: 0;
-  color: var(--color-text);
 }
 .projectContent {
   height: auto;
@@ -85,6 +64,7 @@ defineOptions({
 
 .projectButtons {
   display: flex;
+  margin-top: 15px;
   align-items: center;
   justify-content: space-around;
 }
@@ -122,4 +102,17 @@ defineOptions({
   cursor: pointer;
   transform: scale(1.1);
 }
+.tecSkills{
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+  justify-content: space-around;
+  align-items: center;
+}
+.tecSkills li {
+  border: 2px solid var(--color-background-soft);
+  padding: 5px;
+  border-radius: 50px;
+  }
 </style>
