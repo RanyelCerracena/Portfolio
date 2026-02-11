@@ -4,17 +4,17 @@
   <header>
     <nav>
       <ul>
-        <li class="marker home">
-          <a href="#">Home</a>
-        </li>
         <li class="marker about">
           <a href="#about">About</a>
         </li>
+        <li class="marker skills">
+          <a href="#skills">Skills</a>
+        </li>
         <li class="marker projects">
-          <a href="#b">Projects</a>
+          <a href="#projects">Projects</a>
         </li>
         <li class="marker contact">
-          <a href="#c">Contact</a>
+          <a href="#contact">Contact</a>
         </li>
       </ul>
     </nav>
@@ -36,17 +36,18 @@ ul {
   transition: all 0.3s ease;
   cursor: pointer;
 }
-.home {
-  background: #a4f79c;
-  z-index: 4;
-  width: 25%;
-  clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
-}
 .about {
   background: #7a9de9;
-  z-index: 3;
+  z-index: 4;
   width: 30%;
   margin-left: -1.2rem;
+  clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+.skills{
+  background: #a4f79c;
+  z-index: 3;
+  margin-left: -1.7rem;
+  width: 30%;
   clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
 }
 .projects {
@@ -64,13 +65,15 @@ ul {
 }
 .about a,
 .projects a,
-.contact a {
+.contact a,
+.skills a {
   margin-left: 1rem;
 }
 .home:hover a,
 .about:hover a,
 .projects:hover a,
-.contact:hover a {
+.contact:hover a,
+.skills:hover a {
   color: #fff;
 }
 .marker a {

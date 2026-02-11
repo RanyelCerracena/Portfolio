@@ -1,48 +1,10 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
-const aboutSection = ref(null)
-const myPhoto = ref(null)
-const langsContainer = ref(null)
-
-const handleScroll = () => {
-  if (myPhoto.value && aboutSection.value) {
-    const sectionTop = aboutSection.value.offsetTop
-    const scrollY = window.scrollY
-    const speed = 0.15
-    const yPos = (scrollY - sectionTop) * speed
-    const rotation = 10 + yPos * 0.02
-    myPhoto.value.style.transform = `translateX(-50%) rotate(${rotation}deg) translateY(${yPos}px)`
-  }
-}
-onMounted(() => {
-  handleScroll()
-  window.addEventListener('scroll', handleScroll)
-  const observer = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show')
-          observer.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.2 },
-  )
-
-  if (langsContainer.value) {
-    observer.observe(langsContainer.value)
-  }
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
 </script>
 <template>
-  <div id="about" class="about-page" ref="aboutSection">
-    <h1 class="aboutme">About Me</h1>
+  <div class="about-page">
+    <h1 id="about" class="aboutme">About Me</h1>
 
-    <img class="myPhoto" src="/Ranyel.png" alt="" ref="myPhoto" />
+    <img class="myPhoto" src="/Ranyel.png" alt="" />
 
     <p>
       Sou desenvolvedor Full-Stack e Desktop, com experiência em C#, SQL Server e .NET Core para
@@ -53,7 +15,7 @@ onUnmounted(() => {
     </p>
 
     <h2 class="skills">SKILLS</h2>
-    <div class="langs" ref="langsContainer">
+    <div class="langs">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
         <path
           fill="#9B4F96"
@@ -141,7 +103,6 @@ onUnmounted(() => {
 </template>
 <style scoped>
 .about-page {
-  scroll-margin-top: 120px;
   min-height: 100dvh;
   position: relative;
 }
