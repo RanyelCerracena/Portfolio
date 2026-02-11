@@ -1,20 +1,41 @@
 <script setup>
+defineOptions({
+  name: 'AboutPage',
+})
 </script>
+
 <template>
   <div class="about-page">
-    <h1 class="aboutme">About Me</h1>
+    <section class="about-intro">
+      <h2 class="aboutme">About Me</h2>
 
-    <img class="myPhoto" src="/Ranyel.png" alt="" />
+      <figure class="profile-photo polaroid">
+        <div class="tape tape-photo"></div>
+        <img
+          class="myPhoto"
+          src="/Ranyel.png"
+          alt="Foto de Ranyel Cerracena, desenvolvedor Full-Stack"
+        />
+        <figcaption class="polaroid-caption">Its me</figcaption>
+      </figure>
 
-    <p>
-      Sou desenvolvedor Full-Stack e Desktop, com experiência em C#, SQL Server e .NET Core para
-      criar soluções robustas. No front-end, trabalho com HTML, CSS, JavaScript e frameworks
-      modernos como Vue.js. <br /><br />
-      Tenho curiosidade constante por novas linguagens e tecnologias, atualmente explorando Golang,
-      sempre buscando evoluir e entregar projetos completos, eficientes e inovadores.
-    </p>
-
-    <h2 id="skills" class="skills">SKILLS</h2>
+      <div class="bio-stack">
+        <div class="paper-layer paper-layer-3"></div>
+        <div class="paper-layer paper-layer-2"></div>
+        <div class="bio-paper">
+          <p class="bio-text">
+            Sou desenvolvedor Full-Stack e Desktop, com experiência em C#, SQL Server e .NET Core
+            para criar soluções robustas. No front-end, trabalho com HTML, CSS, JavaScript e
+            frameworks modernos como Vue.js. <br /><br />
+            Tenho curiosidade constante por novas linguagens e tecnologias, atualmente explorando
+            Golang, sempre buscando evoluir e entregar projetos completos, eficientes e inovadores.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <section id="skills" class="skills-section" aria-labelledby="skills-title">
+    <h2 id="skills-title" class="skills">SKILLS</h2>
     <div class="langs">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
         <path
@@ -99,13 +120,19 @@
         />
       </svg>
     </div>
-  </div>
+  </section>
 </template>
 <style scoped>
 .about-page {
   min-height: 100dvh;
   position: relative;
 }
+
+.about-intro {
+  position: relative;
+  min-height: 100dvh;
+}
+
 .aboutme {
   font-family:
     'Chat Favour',
@@ -123,24 +150,107 @@
   font-size: 4rem;
   position: absolute;
   left: 5%;
-  top: 5%;
   z-index: 2;
+  margin: 0;
 }
-.myPhoto {
-  width: auto;
-  max-width: 90%;
-  max-height: 40vh;
+.aboutme::after{
+  content: '';
+  background-color: rgba(180, 73, 207, 0.479);
+  width: 110%;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  left: -5%;
+  z-index: -1;
+}
+.profile-photo {
+  margin: 0;
+  padding: 0;
+  z-index: 5;
+}
+
+.polaroid {
+  background: white;
+  padding: 20px 20px 60px 20px;
+  box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.2);
   position: absolute;
   top: 20%;
   left: 50%;
-  transform: translateX(-50%) rotate(10deg);
-  z-index: 1;
+  transform: translateX(-50%) rotate(5deg);
+  width: 85%;
+  max-width: 500px;
 }
-p {
+
+.polaroid-caption {
+  font-family: 'Chat Favour', cursive;
+  font-size: 2.2rem; /* Legenda um pouco maior */
+  color: #333;
+  text-align: center;
   position: absolute;
-  top: 68%;
+  bottom: 10px;
+  width: calc(100% - 40px);
+}
+
+.tape-photo {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 120px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(1px);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.myPhoto {
+  width: 105%;
+  height: auto;
+  max-height: 70vh;
+  display: block;
+  object-fit: cover;
+}
+
+.bio-stack {
+  position: absolute;
+  top: 85%;
   left: 5%;
   width: 90%;
+  z-index: 10;
+}
+
+.paper-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.paper-layer-3 {
+  transform: rotate(-2deg) translate(-5px, 5px);
+  background-color: #f8f1c8;
+}
+
+.paper-layer-2 {
+  transform: rotate(1.5deg) translate(3px, -2px);
+  background-color: #fbf6d9;
+}
+
+.bio-paper {
+  position: relative;
+  background-color: #fffde8;
+  padding: 20px;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transform: rotate(-0.5deg);
+  background-size: 100% 24px;
+}
+
+.bio-text {
   text-align: justify;
   line-height: 24px;
   font-family:
@@ -157,11 +267,15 @@ p {
     'Helvetica Neue',
     sans-serif;
   font-size: 1.2rem;
-  z-index: 10;
+  margin: 0;
+  color: #333;
+}
+
+.skills-section {
+  position: relative;
+  min-height: 100dvh;
 }
 .skills {
-  position: absolute;
-  bottom: -30%;
   left: 50%;
   font-family:
     'Chat Favour',

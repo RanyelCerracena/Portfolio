@@ -1,29 +1,34 @@
 <script setup>
+defineOptions({
+  name: 'TheHeader',
+})
 </script>
+
 <template>
-  <header>
-    <nav>
+  <header class="site-header">
+    <nav aria-label="Navegação principal">
       <ul>
         <li class="marker about">
-          <a href="#about">About</a>
+          <a href="#about" aria-label="Ir para seção Sobre Mim">About</a>
         </li>
         <li class="marker skills">
-          <a href="#skills">Skills</a>
+          <a href="#skills" aria-label="Ir para seção Habilidades">Skills</a>
         </li>
         <li class="marker projects">
-          <a href="#projects">Projects</a>
+          <a href="#projects" aria-label="Ir para seção Projetos">Projects</a>
         </li>
         <li class="marker contact">
-          <a href="#contact">Contact</a>
+          <a href="#contact" aria-label="Ir para seção Contato">Contact</a>
         </li>
       </ul>
     </nav>
   </header>
 </template>
 <style scoped>
-header {
+.site-header {
   width: 100dvw;
 }
+
 ul {
   width: 100dvw;
   display: flex;
@@ -43,7 +48,7 @@ ul {
   margin-left: -1.2rem;
   clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
 }
-.skills{
+.skills {
   background: #a4f79c;
   z-index: 3;
   margin-left: -1.7rem;
