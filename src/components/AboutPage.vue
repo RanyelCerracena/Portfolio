@@ -2,7 +2,7 @@
 </script>
 <template>
   <div class="about-page">
-    <h1 id="about" class="aboutme">About Me</h1>
+    <h1 class="aboutme">About Me</h1>
 
     <img class="myPhoto" src="/Ranyel.png" alt="" />
 
@@ -14,7 +14,7 @@
       sempre buscando evoluir e entregar projetos completos, eficientes e inovadores.
     </p>
 
-    <h2 class="skills">SKILLS</h2>
+    <h2 id="skills" class="skills">SKILLS</h2>
     <div class="langs">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
         <path
