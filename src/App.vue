@@ -1,44 +1,42 @@
 <script setup>
-import BackgroundAnimation from './components/BackgroundAnimation.vue'
+import Home from './components/Home.vue'
 import TheHeader from './components/TheHeader.vue'
-import AboutMeView from './views/AboutMeView.vue'
-import HomeView from './views/HomeView.vue'
-import ProjectsView from './views/ProjectsView.vue'
+import About from './components/AboutPage.vue'
+
 </script>
 
 <template>
-  <div class="app">
-    <div class="mainBg">
-      <TheHeader />
-      <BackgroundAnimation class="bgAnimation" />
+  <TheHeader class="myHeader" />
+  <main>
+    <Home id="home" />
+    <About class="about" />
+
+    <div class="homeBtn">
+      <a href="#home"><i class="bi bi-house"></i></a>
     </div>
-    <HomeView />
-    <AboutMeView />
-    <ProjectsView />
-  </div>
+  </main>
 </template>
 
 <style scoped>
-.app {
-  display: flex;
-  flex-direction: column;
+main {
   height: 400dvh;
-  width: 99vw;
-  overflow-x: hidden;
 }
-
-.mainBg {
-  position: absolute;
-  height: 100%;
-  width: 100%;
+i {
+  color: #fff;
+  font-size: 2rem;
 }
-
-.bgAnimation {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  z-index: -1;
+.homeBtn {
+  position: fixed;
+  bottom: 2rem;
+  z-index: 1000;
+  right: 2rem;
+  cursor: pointer;
+  background-color: #623697;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
