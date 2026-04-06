@@ -26,80 +26,96 @@ defineOptions({
 </template>
 <style scoped>
 .site-header {
-  width: 100dvw;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
 ul {
-  width: 100dvw;
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   position: relative;
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
+
 .marker {
   background: #ccc;
   z-index: 1;
-  transition: all 0.3s ease;
+  transition: filter 0.3s ease;
   cursor: pointer;
+  width: 115%; /* Faz o elemento vazar para o próximo e evitar espaços em branco */
+  height: 60px;
 }
+
 .about {
   background: #7a9de9;
   z-index: 4;
-  width: 30%;
-  margin-left: -1.2rem;
-  clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%);
 }
+
 .skills {
   background: #a4f79c;
   z-index: 3;
-  margin-left: -1.7rem;
-  width: 30%;
-  clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%);
 }
+
 .projects {
   background: #b37ae9;
   z-index: 2;
-  margin-left: -1.5rem;
-  width: 35%;
-  clip-path: polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%);
 }
+
 .contact {
   background: #e97a96;
   z-index: 1;
-  margin-left: -1.7rem;
-  width: 30%;
+  width: 100%; /* O último não precisa vazar */
 }
-.about a,
-.projects a,
-.contact a,
-.skills a {
-  margin-left: 1rem;
-}
-.home:hover a,
-.about:hover a,
-.projects:hover a,
-.contact:hover a,
-.skills:hover a {
-  color: #fff;
-}
+
 .marker a {
   display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  font-family:
-    Roboto,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Open Sans',
-    'Helvetica Neue',
-    sans-serif;
-  font-size: 17px;
-  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #333;
+  width: 85%; /* Centraliza o texto apenas na área visível antes do corte */
   height: 100%;
-  width: 100%;
-  padding: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact a {
+  width: 100%; /* O último botão usa 100% da largura original */
+}
+
+.marker:hover {
+  filter: brightness(1.1);
+}
+
+.marker:hover a {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .marker a {
+    font-size: 0.8rem;
+    letter-spacing: 0px;
+  }
+}
+
+@media (max-width: 480px) {
+  .marker a {
+    font-size: 0.65rem;
+  }
+  .marker {
+    height: 50px;
+  }
 }
 </style>

@@ -1,36 +1,29 @@
 <script setup>
 import { onMounted } from 'vue'
+import LoadingScreen from './components/LoadingScreen.vue'
 import Home from './components/Home.vue'
 import TheHeader from './components/TheHeader.vue'
 import About from './components/AboutPage.vue'
+import SkillsPage from './components/SkillsPage.vue'
+import ProjectsPage from './components/ProjectsPage.vue'
 
 onMounted(() => {
+  // --- Scroll Suave ---
   const smoothScrollToSection = (event) => {
     const href = event.currentTarget.getAttribute('href')
-
     if (href && href.startsWith('#')) {
       event.preventDefault()
-
       const targetId = href.substring(1)
 
-      // Se for o link home, scroll para o topo absoluto
       if (targetId === 'home') {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        })
+        window.scrollTo({ top: 0, behavior: 'smooth' })
         window.history.pushState(null, '', href)
         return
       }
 
       const targetElement = document.getElementById(targetId)
-
       if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        })
-
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
         window.history.pushState(null, '', href)
       }
     }
@@ -40,10 +33,35 @@ onMounted(() => {
   anchorLinks.forEach((link) => {
     link.addEventListener('click', smoothScrollToSection)
   })
+
+  // --- Intersection Observer (Reveal effects) ---
+  const observerOptions = {
+    threshold: 0.15,
+  }
+
+  const observerCallback = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // Para a seção de skills (langs)
+        if (entry.target.classList.contains('langs')) {
+          entry.target.classList.add('show')
+        }
+        // Para revelações gerais (se houver)
+        entry.target.classList.add('active')
+      }
+    })
+  }
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions)
+
+  // Observa as skills e seções
+  const elementsToObserve = document.querySelectorAll('.section, .langs, .reveal')
+  elementsToObserve.forEach((el) => observer.observe(el))
 })
 </script>
 
 <template>
+  <LoadingScreen />
   <TheHeader />
 
   <main id="main-content">
@@ -57,9 +75,13 @@ onMounted(() => {
       <About />
     </article>
 
-    <article id="projects" class="section projects-section" aria-labelledby="projects-title">
-      <h2 id="projects-title">Projects</h2>
-      <p>Em breve: projetos em destaque.</p>
+    <article id="skills" class="section skills-section" aria-labelledby="skills-title">
+      <h1 id="skills-title" class="visually-hidden">Skills</h1>
+      <SkillsPage />
+    </article>
+
+    <article id="projects-container">
+      <ProjectsPage />
     </article>
 
     <article id="contact" class="section contact-section" aria-labelledby="contact-title">
@@ -97,7 +119,6 @@ main {
   min-height: 100dvh;
 }
 
-.projects-section,
 .contact-section {
   display: flex;
   flex-direction: column;
@@ -105,13 +126,6 @@ main {
   align-items: center;
   gap: 1rem;
   text-align: center;
-}
-
-.projects-section {
-  background-color: #f1ecfd;
-}
-
-.contact-section {
   background-color: #ffe9ef;
 }
 

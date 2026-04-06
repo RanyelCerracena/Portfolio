@@ -45,14 +45,11 @@ defineOptions({
 
 <style scoped>
 .social-medias {
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  top: 55%;
-  right: 0%;
-  transform: translate(-50%);
   background-color: #fcf793;
   width: 250px;
   height: 150px;
@@ -60,6 +57,7 @@ defineOptions({
   border-radius: 2px;
   transform-origin: top center;
   animation: sway 5s ease-in-out infinite;
+  z-index: 10;
 }
 
 .tape {
@@ -69,7 +67,8 @@ defineOptions({
   transform: translateX(-50%);
   width: 80px;
   height: 30px;
-  background-color: rgba(255, 255, 255, 0.466);
+  /* Fita Laranja Washi Tape */
+  background-color: rgba(255, 165, 0, 0.466);
   backdrop-filter: blur(1px);
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.096);
   z-index: 10;
@@ -78,10 +77,10 @@ defineOptions({
 @keyframes sway {
   0%,
   100% {
-    transform: translate(-50%) rotate(-2deg);
+    transform: rotate(-2deg);
   }
   50% {
-    transform: translate(-50%) rotate(2deg);
+    transform: rotate(2deg);
   }
 }
 
