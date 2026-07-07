@@ -1,0 +1,120 @@
+:root {
+  --background-color: #242424;
+  --color-background-loading: #000000;
+
+  --title-font: 'Fraunces', sans-serif;
+  --p-font: 'Inter', sans-serif;
+
+  --text-primary-color: #f0f0f0;
+  --text-secondary-color: #888888;
+  --text-terciary-color: #555555;
+
+  --p-size: 2dvw;
+  --h2-size: clamp(3.6rem, 10vw, 7rem);
+  --h3-size: 4dvw;
+
+  --first-color: #9f69f8;
+  --second-color: #44dd81;
+  --third-color: #44d8dd;
+  --fourth-color: #f983e1;
+
+  /* Animações utilitárias */
+  --anim-quote-fade-duration: 700ms;
+  --anim-quote-descida-duration: 700ms;
+  --anim-quote-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  --anim-quote-descida-distance: 18px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  scrollbar-width: none;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-primary-color);
+  font-family: var(--p-font);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  z-index: 0;
+
+  pointer-events: none;
+}
+
+p {
+  font-size: var(--p-size);
+}
+
+/* =====================
+   Animações utilitárias
+   ===================== */
+
+@keyframes quote-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes quote-descida {
+  from {
+    transform: translate(-50%, calc(-50% - var(--anim-quote-descida-distance)));
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+.quote-fade-in {
+  animation: quote-fade-in var(--anim-quote-fade-duration) var(--anim-quote-easing) both;
+}
+
+.quote-descida {
+  animation: quote-descida var(--anim-quote-descida-duration) var(--anim-quote-easing) both;
+}
+
+.quote-entrance {
+  /* aplica fade e descida juntos */
+  animation:
+    quote-fade-in var(--anim-quote-fade-duration) var(--anim-quote-easing) both,
+    quote-descida var(--anim-quote-descida-duration) var(--anim-quote-easing) both;
+}
+
+h2 {
+  font-size: var(--h2-size);
+}
+
+h2,
+h3 {
+  font-family: var(--title-font);
+}
+
+ul,
+li,
+a {
+  text-decoration: none;
+  list-style: none;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
