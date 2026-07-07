@@ -1,46 +1,22 @@
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import InitialText from '../InitialText.vue'
 import Navbar from '../layout/NavBar.vue'
-import ProjectList from '../ProjectList.vue'
+import ProjectList from '../projects/ProjectList.vue'
+import { useProjects } from '@/composables/useProjects.js'
 
-const isFiltersOpen = ref(false)
-const selectedFilter = ref('all')
+const router = useRouter()
 
-function onGlobalPointerDown(e) {
-  if (!isFiltersOpen.value) return
-
-  const menu = document.querySelector('.filters-menu')
-  const button = document.querySelector('.filters-button')
-
-  if (!menu || !button) return
-
-  const target = e.target
-
-  if (menu.contains(target) || button.contains(target)) return
-
-  isFiltersOpen.value = false
-}
-
-onMounted(() => {
-  document.addEventListener('pointerdown', onGlobalPointerDown)
-})
-
-onBeforeUnmount(() => {
-  document.removeEventListener('pointerdown', onGlobalPointerDown)
-})
+const { activeType, activeFilter, availableFilters, filteredProjects, changeType, changeFilter } =
+  useProjects()
 </script>
 
-
 <template>
-  <!-- Landing page sections (scroll) -->
   <div class="landing">
-    <!-- navbar fixa (sempre no topo) -->
     <div class="navbar-fixed">
       <Navbar />
     </div>
 
-    <!-- Conteúdo abaixo do vídeo (seções fazem scroll) -->
     <section id="home" class="section section-home">
       <section class="flex-wrapper">
         <aside class="informations">
@@ -99,49 +75,29 @@ onBeforeUnmount(() => {
       </section>
     </section>
 
-
     <section id="projects" class="section section-projects">
       <div class="container">
         <div class="projects-header">
           <h2>What I <br><span class="italic">built</span></h2>
-
-          <div class="filters">
-            <button type="button" class="filters-button" :aria-expanded="isFiltersOpen"
-              @click="isFiltersOpen = !isFiltersOpen">
-              Filtros
-              <i class="bi" :class="isFiltersOpen ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
-            </button>
-
-            <!-- overlay modal-like -->
-            <div v-if="isFiltersOpen" class="filters-overlay" aria-hidden="true"></div>
-
-            <div v-if="isFiltersOpen" class="filters-menu glass" role="menu">
-
-              <button type="button" class="filters-option" data-kind="front-end"
-                :class="{ active: selectedFilter === 'front-end' }"
-                @click="selectedFilter = 'front-end'; isFiltersOpen = false">
-                Front-end
-              </button>
-              <button type="button" class="filters-option" data-kind="back-end"
-                :class="{ active: selectedFilter === 'back-end' }"
-                @click="selectedFilter = 'back-end'; isFiltersOpen = false">
-                Back-end
-              </button>
-              <button type="button" class="filters-option" data-kind="ui-ux"
-                :class="{ active: selectedFilter === 'ui-ux' }"
-                @click="selectedFilter = 'ui-ux'; isFiltersOpen = false">
-                UI & UX Design
-              </button>
-              <button type="button" class="filters-option" data-kind="all" :class="{ active: selectedFilter === 'all' }"
-                @click="selectedFilter = 'all'; isFiltersOpen = false">
-                Todos
-              </button>
-            </div>
-          </div>
         </div>
 
         <section class="glass projects-wrapper">
-          <ProjectList :filter="selectedFilter" />
+          <ProjectList
+            :active-type="activeType"
+            :active-filter="activeFilter"
+            :filters="availableFilters"
+            :projects="filteredProjects"
+            :limit="4"
+            @change-type="changeType"
+            @change-filter="changeFilter"
+          />
+
+          <div class="view-more-wrapper">
+            <button class="view-more-btn" @click="router.push('/projects')">
+              View More
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
         </section>
       </div>
     </section>
@@ -176,7 +132,6 @@ onBeforeUnmount(() => {
   width: 93dvw;
 }
 
-/* garante altura igual entre o bloco da infos e o bloco da imagem */
 .flex-wrapper > .informations {
   display: flex;
   flex-direction: column;
@@ -195,7 +150,6 @@ onBeforeUnmount(() => {
   height: 100%;
 }
 
-/* força a “glass” da imagem a esticar */
 .image-wrapper > .myImage {
   width: 100%;
   height: 100%;
@@ -203,21 +157,18 @@ onBeforeUnmount(() => {
   align-items: stretch;
 }
 
-/* ajuda a manter o img ocupando a altura do card */
 .image-wrapper > .myImage img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-/* mobile: só reduz largura, sem “travar” altura */
+
 @media (max-width: 768px) {
   .flex-wrapper {
     align-items: flex-start;
   }
 }
-
-
 
 .italic {
   font-style: italic;
@@ -241,16 +192,14 @@ onBeforeUnmount(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-
   flex-direction: column;
 }
-
 
 .myImage {
   padding: 25px;
 }
 
-.myImage>img {
+.myImage > img {
   border-radius: 10px;
 }
 
@@ -387,7 +336,6 @@ h2 {
 
 .buttons-wrapper {
   display: grid;
-  /* ocupa o máximo de espaço disponível do pai sem “sair” da glass */
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 10px;
 }
@@ -396,23 +344,14 @@ h2 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  /* espaçamento consistente entre texto e ícone */
   gap: 5px;
-
-  /* evita variações por line-height */
   line-height: 1;
-
   text-align: center;
   padding: 8px 10px;
   border-radius: 10px;
-
-  /* respeita o pai / célula do grid */
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-
-  /* o grid já controla o espaçamento */
   margin: 0;
 }
 
@@ -422,14 +361,12 @@ h2 {
   }
 }
 
-
-.CTT_button>p {
+.CTT_button > p {
   margin: 0;
   line-height: 1;
 }
 
-.CTT_button>i {
-  /* garante que o ícone fique centralizado dentro da linha */
+.CTT_button > i {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -439,10 +376,8 @@ h2 {
 .informations {
   display: flex;
   flex-direction: column;
-
   gap: 10px;
   width: 70%;
-
   justify-content: space-between;
 }
 
@@ -460,7 +395,7 @@ h2 {
   text-wrap: nowrap;
 }
 
-.localInfo>p {
+.localInfo > p {
   font-size: 15px;
   margin-left: 15px;
 }
@@ -472,240 +407,67 @@ h2 {
 .projects-header {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-
-  margin-bottom: 20px;
+  justify-content: flex-start;
+  margin-bottom: 32px;
 }
-
-.filters {
-  position: relative;
-  margin-top: 8px;
-}
-
-.filters-button {
-  /* Apple-like toggle */
-  position: relative;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 10px 14px;
-  border-radius: 14px;
-
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.06);
-
-  color: var(--text-primary-color);
-  font-family: var(--p-font);
-  cursor: pointer;
-
-  user-select: none;
-
-  /* smooth interactions */
-  transition:
-    transform 180ms ease,
-    background 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
-
-  box-shadow:
-    0 0 0 rgba(255, 255, 255, 0),
-    0 10px 30px rgba(0, 0, 0, 0);
-}
-
-.filters-button::before {
-  content: '';
-
-  position: absolute;
-  inset: -1px;
-
-  border-radius: inherit;
-
-  opacity: 0;
-  transition: opacity 200ms ease;
-
-  pointer-events: none;
-}
-
-.filters-button:hover {
-  transform: translateY(-1px);
-  border-color: rgba(255, 255, 255, 0.34);
-  background: rgba(255, 255, 255, 0.09);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.25);
-}
-
-.filters-button:hover::before {
-  opacity: 1;
-}
-
-.filters-button:active {
-  transform: translateY(0);
-}
-
-/* animate caret icon */
-.filters-button i {
-  transition: transform 220ms ease;
-}
-
-.filters-button[aria-expanded='true'] i {
-  transform: rotate(180deg);
-}
-
-
-.filters-menu {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 10px);
-  min-width: 240px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 11;
-
-  transform-origin: top right;
-  animation: filters-pop 280ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-.filters-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  animation: filters-overlay-fade 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-@keyframes filters-overlay-fade {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes filters-pop {
-  from {
-    opacity: 0;
-    transform: translateY(-6px) scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-
-.filters-option {
-  text-align: left;
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text-primary-color);
-  cursor: pointer;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-}
-
-
-.filters-option {
-  transition:
-    background 160ms ease,
-    border-color 160ms ease,
-    transform 160ms ease;
-  transform: translateZ(0);
-}
-
-.filters-option:hover {
-  transform: translateY(-1px);
-  border-color: rgba(255, 255, 255, 0.34);
-  background: rgba(255, 255, 255, 0.09);
-}
-
-.filters-option::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: radial-gradient(120px 80px at 0% 0%,
-      rgba(159, 105, 248, 0.35),
-      rgba(159, 105, 248, 0) 60%);
-
-  opacity: 0;
-  transition: opacity 200ms ease;
-  pointer-events: none;
-}
-
-.filters-option:hover::before {
-  opacity: 1;
-}
-
-/* gradiente de hover por tipo (equivale às cores ativas das tags) */
-.filters-option[data-kind='front-end']:hover::before {
-  background: radial-gradient(120px 80px at 0% 0%, rgba(68, 221, 129, 0.45), rgba(68, 221, 129, 0) 60%);
-}
-
-.filters-option[data-kind='back-end']:hover::before {
-  background: radial-gradient(120px 80px at 0% 0%, rgba(159, 105, 248, 0.45), rgba(159, 105, 248, 0) 60%);
-}
-
-.filters-option[data-kind='ui-ux']:hover::before {
-  background: radial-gradient(120px 80px at 0% 0%, rgba(68, 216, 221, 0.38), rgba(68, 216, 221, 0) 60%);
-}
-
-.filters-option[data-kind='all']:hover::before {
-  background: radial-gradient(120px 80px at 0% 0%, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0) 60%);
-}
-
-
-
-.filters-option.active {
-  background: rgba(77, 77, 255, 0.35);
-  border-color: rgba(77, 77, 255, 0.6);
-}
-
-/* colors by filter kind */
-.filters-option[data-kind='front-end'].filters-option.active {
-  background: rgba(68, 221, 129, 0.3);
-  border-color: rgba(68, 221, 129, 0.65);
-}
-
-.filters-option[data-kind='back-end'].filters-option.active {
-  background: rgba(159, 105, 248, 0.3);
-  border-color: rgba(159, 105, 248, 0.65);
-}
-
-.filters-option[data-kind='ui-ux'].filters-option.active {
-  background: rgba(68, 216, 221, 0.25);
-  border-color: rgba(68, 216, 221, 0.65);
-}
-
-.filters-option[data-kind='all'].filters-option.active {
-  background: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.35);
-}
-
 
 @media (max-width: 768px) {
   .projects-header {
     flex-direction: column;
     align-items: stretch;
   }
+}
 
-  .filters {
-    margin-top: 0;
-  }
+.projects-wrapper {
+  padding: 20px;
+}
+
+.view-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.view-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary-color);
+  font-family: var(--p-font);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.view-more-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.view-more-btn:active {
+  transform: translateY(0);
+}
+
+.view-more-btn i {
+  transition: transform 200ms ease;
+}
+
+.view-more-btn:hover i {
+  transform: translateX(3px);
 }
 
 @media (min-width: 1920px) {
-
-  /* evita a sessão de projetos “estourar” a largura em 1920+ */
   .section-projects {
     padding-top: 14dvh;
   }

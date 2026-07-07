@@ -15,6 +15,8 @@ export default [
     videos: [],
     github: 'https://github.com',
     demo: 'https://demo.com',
+    behance: '',
+    figma: '',
     externalLinks: [],
   },
   {
@@ -33,6 +35,8 @@ export default [
     videos: [],
     github: 'https://github.com',
     demo: 'https://demo.com',
+    behance: '',
+    figma: '',
     externalLinks: [],
   },
   {
@@ -43,7 +47,7 @@ export default [
       'A modern, responsive portfolio website built with Vue 3 and Vite, featuring glassmorphism design.',
     longDescription:
       'This design project focuses on the intersection of glassmorphism and modern web aesthetics. The goal was to create a highly immersive and interactive user experience.',
-    categories: ['ui-design', 'landing-page'],
+    categories: ['ui', 'landing-page'],
     stack: [],
     status: 'stable',
     coverImage: 'https://via.placeholder.com/800x450',
@@ -51,6 +55,8 @@ export default [
     videos: [],
     github: '',
     demo: '',
+    behance: '',
+    figma: '',
     externalLinks: [{ name: 'Behance', url: '#' }],
   },
   {
@@ -61,7 +67,7 @@ export default [
       'Complete visual identity for a leading technology company, including logo and brand guidelines.',
     longDescription:
       'A full branding project for TechCorp, covering everything from logo design to typography and color palettes, ensuring a cohesive brand presence across all digital and physical touchpoints.',
-    categories: ['brand-identity', 'logo'],
+    categories: ['branding', 'logo'],
     stack: [],
     status: 'stable',
     coverImage: 'https://via.placeholder.com/800x450',
@@ -69,6 +75,8 @@ export default [
     videos: [],
     github: '',
     demo: '',
+    behance: '',
+    figma: '',
     externalLinks: [{ name: 'Figma', url: '#' }],
   },
   {
@@ -87,6 +95,8 @@ export default [
     videos: [],
     github: '',
     demo: '',
+    behance: '',
+    figma: '',
     externalLinks: [],
   },
   {
@@ -104,6 +114,8 @@ export default [
     videos: [],
     github: 'https://github.com',
     demo: 'https://demo.com',
+    behance: '',
+    figma: '',
     externalLinks: [],
   },
 ]
