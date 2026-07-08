@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 
 const currentPhase = ref('butterfly') // 'butterfly', 'split'
+const quoteText = 'Curiosity brought you here.'
 const isHidden = ref(false)
 
 onMounted(() => {
@@ -38,28 +39,17 @@ onMounted(() => {
     <div class="half right-half"></div>
 
     <!-- Conteúdo Dinâmico do Loading -->
-    <Transition name="fade" mode="out-in">
-      <!-- Borboleta -->
-      <div v-if="currentPhase === 'butterfly'" class="loading-content sequence-phase" key="butterfly">
-        <svg class="butterfly-icon" viewBox="0 0 100 100" width="80" height="80">
-          <!-- Asa Superior Esquerda -->
-          <path class="sketch-wing-left" d="M 50 50 C 30 20 10 30 20 50 C 30 70 50 60 50 50 Z" fill="none"
-            stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-          <!-- Asa Superior Direita -->
-          <path class="sketch-wing-right" d="M 50 50 C 70 20 90 30 80 50 C 70 70 50 60 50 50 Z" fill="none"
-            stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-          <!-- Asa Inferior Esquerda -->
-          <path class="sketch-wing-left-bot" d="M 50 55 C 30 65 20 85 35 90 C 50 85 50 65 50 55 Z" fill="none"
-            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <!-- Asa Inferior Direita -->
-          <path class="sketch-wing-right-bot" d="M 50 55 C 70 65 80 85 65 90 C 50 85 50 65 50 55 Z" fill="none"
-            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <!-- Antenas -->
-          <path class="sketch-antennas" d="M 50 45 C 45 30 40 25 40 25 M 50 45 C 55 30 60 25 60 25" fill="none"
-            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
+    <div class="loading-content"
+      :class="{ 'is-appearing': currentPhase === 'butterfly', 'is-exiting': currentPhase === 'split' }">
+      <div class="sparrow-wrap" aria-hidden="true">
+        <img class="sparrow" src="/sparrow.png" alt="" />
+        <div class="sparrow-glow" aria-hidden="true" />
       </div>
-    </Transition>
+
+      <div class="loading-quote" :class="{ 'quote-exit': currentPhase === 'split' }">
+        {{ quoteText }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -144,74 +134,207 @@ onMounted(() => {
   gap: 1.5rem;
 }
 
-/* Borboleta */
-.butterfly-icon {
-  animation: float-butterfly 3s infinite ease-in-out;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+/* Sparrow visuals (entrada/saída) */
+.sparrow-wrap {
+  position: relative;
+  width: min(220px, 55vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateZ(0);
 }
 
-.sketch-wing-left,
-.sketch-wing-right,
-.sketch-wing-left-bot,
-.sketch-wing-right-bot,
-.sketch-antennas {
-  stroke-dasharray: 200;
-  stroke-dashoffset: 200;
-  animation: draw-wing 1.5s forwards ease-in-out;
+
+.sparrow {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0;
+  filter: blur(18px);
+  transform: translateY(10px) scale(0.92) rotate(-4deg) translateZ(0);
+  will-change: transform, opacity, filter;
 }
 
-/* Delay suave para parecer rascunho sendo feito aos poucos */
-.sketch-wing-right {
-  animation-delay: 0.2s;
+
+.sparrow-glow {
+  position: absolute;
+  inset: -18% 0 -18% 0;
+  border-radius: 999px;
+  background: radial-gradient(circle at 50% 50%, rgba(68, 216, 255, 0.35), rgba(68, 216, 255, 0) 60%);
+  filter: blur(32px);
+  opacity: 0;
+  transform: scale(0.85);
+  animation: sparrow-glow-enter 2100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform, filter;
 }
 
-.sketch-wing-left-bot {
-  animation-delay: 0.4s;
+.loading-content.is-appearing {
+  animation: sparrow-breathe 2400ms ease-in-out infinite;
 }
 
-.sketch-wing-right-bot {
-  animation-delay: 0.6s;
+
+.loading-content.is-exiting .sparrow {
+  animation: sparrow-exit 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.sketch-antennas {
-  animation-delay: 0.8s;
+.loading-content.is-exiting .sparrow-glow {
+  animation: sparrow-glow-exit 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes draw-wing {
-  to {
-    stroke-dashoffset: 0;
+.loading-content.is-appearing .sparrow {
+  animation: sparrow-enter 2100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.loading-content.is-appearing .sparrow-glow {
+  animation: sparrow-glow-enter 2100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+
+.loading-quote {
+  font-family: var(--p-font);
+  font-size: 0.95rem;
+  color: var(--text-secondary-color);
+  opacity: 0;
+  transform: translateY(12px);
+  animation: quote-in 1200ms ease 2050ms both;
+  text-align: center;
+  max-width: 520px;
+}
+
+.loading-quote.quote-exit {
+  animation: quote-exit 850ms ease both;
+}
+
+/* Entrada (emergindo da escuridão) */
+@keyframes sparrow-enter {
+  0% {
+    opacity: 0;
+    filter: blur(26px);
+    transform: translateY(14px) scale(0.88) rotate(-10deg);
+  }
+
+  35% {
+    opacity: 1;
+    filter: blur(10px);
+    transform: translateY(6px) scale(0.98) rotate(-4deg);
+  }
+
+  65% {
+    opacity: 1;
+    filter: blur(2px);
+    transform: translateY(0px) scale(1) rotate(-2deg);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px) scale(1) rotate(0deg);
   }
 }
 
-@keyframes float-butterfly {
+@keyframes sparrow-glow-enter {
+  0% {
+    opacity: 0;
+    transform: scale(0.75);
+    filter: blur(46px);
+  }
+
+  45% {
+    opacity: 0.7;
+    transform: scale(1);
+    filter: blur(30px);
+  }
+
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+    filter: blur(44px);
+  }
+}
+
+/* Microinterações (respiração suave) */
+@keyframes sparrow-breathe {
 
   0%,
   100% {
-    transform: translateY(0px) scale(1);
+    transform: translateY(0px);
   }
 
   50% {
-    transform: translateY(-10px) scale(1.05);
+    transform: translateY(-6px);
   }
 }
 
-/* Transições de Fase (Vue Transition) */
-.fade-enter-active,
-.fade-leave-active {
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
+/* Saída (levantar voo + blur) */
+@keyframes sparrow-exit {
+  0% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px) scale(1) rotate(0deg);
+  }
+
+  18% {
+    opacity: 1;
+    filter: blur(2px);
+    transform: translateY(-6px) scale(1.03) rotate(6deg);
+  }
+
+  55% {
+    opacity: 0.8;
+    filter: blur(10px);
+    transform: translateY(-26px) scale(1.05) rotate(9deg);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(22px);
+    transform: translateY(-120px) scale(1.08) rotate(10deg);
+  }
 }
 
-.fade-enter-from {
-  opacity: 0;
-  transform: translate(-50%, -40%);
-  /* Vem levemente de cima */
+@keyframes sparrow-glow-exit {
+  0% {
+    opacity: 0.35;
+    filter: blur(44px);
+    transform: scale(1);
+  }
+
+  40% {
+    opacity: 0.25;
+    filter: blur(58px);
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(70px);
+    transform: scale(1.15);
+  }
 }
 
-.fade-leave-to {
-  opacity: 0;
-  transform: translate(-50%, -60%);
-  /* Sai levemente para cima */
+@keyframes quote-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes quote-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0px);
+    filter: blur(0px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+    filter: blur(8px);
+  }
 }
 </style>

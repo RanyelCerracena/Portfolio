@@ -8,17 +8,17 @@ import StatusCard from './StatusCard.vue'
 const isMounted = ref(false)
 
 const twoCols = [
-  { title: 'Software Engineer', subtitle: 'Software + Systems' },
-  { title: 'UI Enthusiast', subtitle: 'Design + Motion' },
-  { title: 'Backend Developer', subtitle: 'APIs + Data' },
-  { title: 'Always Learning', subtitle: 'Curiosity-driven' },
+  { title: 'Product Engineering', subtitle: 'Design-led software delivery' },
+  { title: 'Digital Experience', subtitle: 'Usability + visual consistency' },
+  { title: 'API & Systems', subtitle: 'Reliable integrations at scale' },
+  { title: 'Continuous Craft', subtitle: 'Iteration for long-term quality' },
 ]
 
 const journeySteps = [
-  { year: '2022', text: 'Started programming' },
-  { year: '2023', text: 'Desktop applications' },
-  { year: '2024', text: 'Backend development' },
-  { year: 'Today', text: 'Building modern digital products' },
+  { year: '2022', text: 'Building foundational skills' },
+  { year: '2023', text: 'Shipped desktop experiences' },
+  { year: '2024', text: 'Developed backend systems' },
+  { year: 'Today', text: 'Delivering modern digital products' },
 ]
 
 const techItems = ['Vue', 'Go', 'C#', '.NET', 'Docker', 'SQL', 'Git', 'REST']
@@ -63,26 +63,26 @@ onMounted(async () => {
       <aside class="about-intro glass about-intro__card" data-about-stagger>
         <div class="about-intro__content">
           <div class="about-intro__kicker">Ranyel Cerracena</div>
-          <p class="about-intro__text">
-            I've always believed that technology is another form of creativity.
-          </p>
-          <p class="about-intro__text">
+          <p class="about-intro__text">I've always believed that technology is another form of creativity.
+            <br>
+            <br>
             My story didn't begin with programming—it began with design. As a teenager, I spent hours creating
             wallpapers, experimenting with Photoshop Touch, and exploring every tool that allowed me to transform ideas
             into something visual. I wasn't just learning software; I was discovering the excitement of creating.
-          </p>
-          <p class="about-intro__text">
+            <br>
+            <br>
             Years later, programming entered my life and completely changed the way I approached technology. I realized
             that code wasn't replacing creativity—it was expanding it. Every application, API or interface became
             another canvas where ideas could take shape.
-          </p>
-          <p class="about-intro__text">
+            <br>
+            <br>
             Today, I combine both passions. I enjoy building robust software, but I also care deeply about the
             experience people have while using it. To me, engineering and design are not opposites—they are
             complementary parts of the same process.
+            <br>
+            <br>
+            My goal is simple: create digital products that are not only functional, but memorable.
           </p>
-          <p class="about-intro__text">
-            My goal is simple: create digital products that are not only functional, but memorable.</p>
         </div>
 
       </aside>

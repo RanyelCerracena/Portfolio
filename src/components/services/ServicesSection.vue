@@ -29,10 +29,11 @@ onMounted(() => {
 
 <template>
   <section ref="sectionRef" class="services" :class="{ 'services--visible': isVisible }">
+
     <header class="services__header">
       <div class="services__small">SERVICES</div>
 
-      <h2 class="services__title">
+      <h2 class="services__title" style="white-space: nowrap;">
         <span class="services__title-regular">What can I build</span>
         <span class="services__title-italic"> for you?</span>
       </h2>

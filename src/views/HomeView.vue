@@ -6,6 +6,8 @@ import ProjectList from '../components/projects/ProjectList.vue'
 import { useProjects } from '@/composables/useProjects.js'
 import AboutSection from '@/components/about/AboutSection.vue'
 import ServicesSection from '@/components/services/ServicesSection.vue'
+import SectionHeader from '@/components/layout/SectionHeader.vue'
+
 
 
 const router = useRouter()
@@ -64,7 +66,7 @@ const { activeType, activeFilter, availableFilters, filteredProjects, changeType
                 <div class="separator">|</div>
                 <div class="status-group">
                   <span class="status-dot"></span>
-                  <span class="status-text">OPEN TO WORK</span>
+                  <span class="status-text">OPEN FOR PROJECTS</span>
                 </div>
               </div>
             </div>
@@ -81,7 +83,8 @@ const { activeType, activeFilter, availableFilters, filteredProjects, changeType
     <section id="projects" class="section section-projects">
       <div class="container">
         <div class="projects-header">
-          <h2>What I <br><span class="italic">built</span></h2>
+          <SectionHeader kicker="PROJECTS" title="What I can deliver" title-italic=""
+            description="I build premium digital experiences—crafted for performance, polish and long-term scalability." />
         </div>
 
         <section class="glass projects-wrapper">
@@ -101,7 +104,8 @@ const { activeType, activeFilter, availableFilters, filteredProjects, changeType
     <section id="about" class="section section-about">
       <div class="container">
         <div class="projects-header">
-          <h2>Who I <br><span class="italic">am</span></h2>
+          <SectionHeader kicker="ABOUT" title="How I create value" title-italic=""
+            description="I turn complexity into clean product experiences—designed with intention and built to last." />
         </div>
         <AboutSection />
       </div>
@@ -199,7 +203,7 @@ const { activeType, activeFilter, availableFilters, filteredProjects, changeType
   margin-top: 196px;
 }
 
-.section-services{
+.section-services {
   margin-top: 20rem;
   margin-bottom: 20rem;
 }
