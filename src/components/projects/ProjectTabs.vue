@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+defineProps({
   activeTab: {
     type: String,
     required: true,
@@ -80,9 +80,11 @@ const tabs = [
 
   cursor: pointer;
 }
-.tab{
-    width:100%;
+
+.tab {
+  width: 100%;
 }
+
 .tab.active {
   color: white;
 }

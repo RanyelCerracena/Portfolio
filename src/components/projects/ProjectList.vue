@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, nextTick } from 'vue'
+import { computed } from 'vue'
 import ProjectTabs from './ProjectTabs.vue'
 import ProjectFilters from './ProjectFilters.vue'
 import ProjectCard from './ProjectCard.vue'
@@ -25,7 +25,7 @@ function onEnter(el, done) {
     return
   }
 
-  cards.forEach((card, i) => {
+  cards.forEach((card) => {
     card.style.opacity = '0'
     card.style.transform = 'translateY(10px)'
   })

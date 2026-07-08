@@ -1,9 +1,12 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import InitialText from '../InitialText.vue'
-import Navbar from '../layout/NavBar.vue'
-import ProjectList from '../projects/ProjectList.vue'
+import InitialText from '../components/InitialText.vue'
+import Navbar from '../components/layout/NavBar.vue'
+import ProjectList from '../components/projects/ProjectList.vue'
 import { useProjects } from '@/composables/useProjects.js'
+import AboutSection from '@/components/about/AboutSection.vue'
+import ServicesSection from '@/components/services/ServicesSection.vue'
+
 
 const router = useRouter()
 
@@ -82,15 +85,8 @@ const { activeType, activeFilter, availableFilters, filteredProjects, changeType
         </div>
 
         <section class="glass projects-wrapper">
-          <ProjectList
-            :active-type="activeType"
-            :active-filter="activeFilter"
-            :filters="availableFilters"
-            :projects="filteredProjects"
-            :limit="4"
-            @change-type="changeType"
-            @change-filter="changeFilter"
-          />
+          <ProjectList :active-type="activeType" :active-filter="activeFilter" :filters="availableFilters"
+            :projects="filteredProjects" :limit="4" @change-type="changeType" @change-filter="changeFilter" />
 
           <div class="view-more-wrapper">
             <button class="view-more-btn" @click="router.push('/projects')">
@@ -102,17 +98,21 @@ const { activeType, activeFilter, availableFilters, filteredProjects, changeType
       </div>
     </section>
 
-    <section id="about" class="section">
+    <section id="about" class="section section-about">
       <div class="container">
-        <h2>About</h2>
+        <div class="projects-header">
+          <h2>Who I <br><span class="italic">am</span></h2>
+        </div>
+        <AboutSection />
       </div>
     </section>
 
-    <section id="medias" class="section">
+    <section id="services" class="section section-services">
       <div class="container">
-        <h2>Medias</h2>
+        <ServicesSection />
       </div>
     </section>
+
   </div>
 </template>
 
@@ -132,13 +132,13 @@ const { activeType, activeFilter, availableFilters, filteredProjects, changeType
   width: 93dvw;
 }
 
-.flex-wrapper > .informations {
+.flex-wrapper>.informations {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-.flex-wrapper > .image-wrapper {
+.flex-wrapper>.image-wrapper {
   display: flex;
   flex: 1;
 }
@@ -150,14 +150,14 @@ const { activeType, activeFilter, availableFilters, filteredProjects, changeType
   height: 100%;
 }
 
-.image-wrapper > .myImage {
+.image-wrapper>.myImage {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: stretch;
 }
 
-.image-wrapper > .myImage img {
+.image-wrapper>.myImage img {
   display: block;
   width: 100%;
   height: 100%;
@@ -195,11 +195,20 @@ const { activeType, activeFilter, availableFilters, filteredProjects, changeType
   flex-direction: column;
 }
 
+.section-about {
+  margin-top: 196px;
+}
+
+.section-services{
+  margin-top: 20rem;
+  margin-bottom: 20rem;
+}
+
 .myImage {
   padding: 25px;
 }
 
-.myImage > img {
+.myImage>img {
   border-radius: 10px;
 }
 
@@ -215,7 +224,6 @@ const { activeType, activeFilter, availableFilters, filteredProjects, changeType
 
 .container {
   width: 90%;
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -361,12 +369,12 @@ h2 {
   }
 }
 
-.CTT_button > p {
+.CTT_button>p {
   margin: 0;
   line-height: 1;
 }
 
-.CTT_button > i {
+.CTT_button>i {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -395,7 +403,7 @@ h2 {
   text-wrap: nowrap;
 }
 
-.localInfo > p {
+.localInfo>p {
   font-size: 15px;
   margin-left: 15px;
 }
