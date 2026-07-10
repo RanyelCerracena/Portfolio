@@ -19,7 +19,8 @@ function statusColor(status) {
 <template>
   <article class="card glass">
     <div class="card-image">
-      <img :src="project.coverImage" :alt="project.title" />
+      <img v-if="project.logo" :src="project.logo" :alt="project.title" class="card-logo" />
+      <img v-else :src="project.coverImage" :alt="project.title" />
     </div>
 
     <div class="card-body">
@@ -54,14 +55,23 @@ function statusColor(status) {
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
+  isolation: isolate;
+  box-shadow: none;
   transition:
-    transform 200ms ease,
-    box-shadow 200ms ease;
+    transform 0.4s var(--ease-apple-spring),
+    box-shadow 0.4s var(--ease-apple);
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-6px) scale(1.015);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.card:active {
+  transform: translateY(-2px) scale(0.99);
+  transition-duration: 0.15s;
 }
 
 .card-image {
@@ -75,6 +85,12 @@ function statusColor(status) {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.card-logo {
+  object-fit: contain !important;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .card-body {
@@ -146,5 +162,24 @@ function statusColor(status) {
 .link:hover {
   background: rgba(68, 216, 221, 0.2);
   color: var(--text-primary-color);
+}
+
+@media (max-width: 768px) {
+  .card {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .card-body {
+    padding: 12px;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+  }
+
+  .card-description {
+    font-size: 0.75rem;
+  }
 }
 </style>

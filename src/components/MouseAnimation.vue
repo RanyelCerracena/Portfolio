@@ -27,8 +27,6 @@
   border-radius: 25px;
   opacity: 0.75;
   box-sizing: content-box;
-
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.699);
 }
 
 .scroller {

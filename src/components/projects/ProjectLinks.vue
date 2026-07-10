@@ -1,4 +1,8 @@
 <script setup>
+import { useI18n } from '@/composables/useI18n.js'
+
+const { t } = useI18n()
+
 defineProps({
   project: { type: Object, required: true },
 })
@@ -6,7 +10,7 @@ defineProps({
 
 <template>
   <div class="links">
-    <h3 class="section-title">Links</h3>
+    <h3 class="section-title">{{ t('projects.links') }}</h3>
     <div class="links-row">
       <a
         v-if="project.github"
@@ -24,7 +28,7 @@ defineProps({
         rel="noopener"
         class="link-btn"
       >
-        <i class="bi bi-box-arrow-up-right"></i> Live Demo
+        <i class="bi bi-box-arrow-up-right"></i> {{ t('projects.liveDemo') }}
       </a>
       <a
         v-if="project.behance"

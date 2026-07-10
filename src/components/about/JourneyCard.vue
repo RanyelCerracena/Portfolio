@@ -1,4 +1,8 @@
 <script setup>
+import { useI18n } from '@/composables/useI18n.js'
+
+const { t } = useI18n()
+
 defineProps({
   steps: {
     type: Array,
@@ -10,8 +14,8 @@ defineProps({
 <template>
   <div class="glass about-card">
     <div class="about-card__header">
-      <h3>Journey</h3>
-      <span class="about-card__hint">timeline</span>
+      <h3>{{ t('about.journeyTitle') }}</h3>
+      <span class="about-card__hint">{{ t('about.journeyHint') }}</span>
     </div>
 
     <div class="about-journey">
@@ -26,12 +30,14 @@ defineProps({
 <style scoped>
 .about-card {
   padding: 18px;
-  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  box-shadow: none;
+  transition: transform 0.4s var(--ease-apple-spring), box-shadow 0.4s var(--ease-apple),
+    border-color 0.4s var(--ease-apple);
 }
 
 .about-card:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
   border-color: rgba(255, 255, 255, 0.28);
 }
 

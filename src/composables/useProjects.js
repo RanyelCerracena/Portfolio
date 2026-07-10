@@ -1,6 +1,20 @@
 import { ref, computed, watch } from 'vue'
 import projectsData from '@/data/projects.js'
 import projectFilters from '@/data/projectFilters.js'
+import { messages } from '@/i18n/index.js'
+import { locale } from '@/composables/useI18n.js'
+
+function getTranslatedProject(project) {
+  const lang = locale.value
+  const translations = messages[lang]?.projects?.data?.[project.id]
+  if (!translations) return project
+  return {
+    ...project,
+    title: translations.title || project.title,
+    description: translations.description || project.description,
+    longDescription: translations.longDescription || project.longDescription,
+  }
+}
 
 export function useProjects({ route, router } = {}) {
   const internalType = ref('development')
@@ -44,18 +58,28 @@ export function useProjects({ route, router } = {}) {
   })
 
   const filteredProjects = computed(() => {
-    return projectsData.filter((project) => {
-      const typeMatch = project.type === activeType.value
-      const categoryMatch =
-        activeFilter.value === 'all' || project.categories.includes(activeFilter.value)
-      return typeMatch && categoryMatch
-    })
+    return projectsData
+      .filter((project) => {
+        const typeMatch = project.type === activeType.value
+        const categoryMatch =
+          activeFilter.value === 'all' || project.categories.includes(activeFilter.value)
+        return typeMatch && categoryMatch
+      })
+      .map(getTranslatedProject)
   })
 
   const currentProject = computed(() => {
     if (selectedProjectId.value) {
       const found = filteredProjects.value.find((p) => p.id === selectedProjectId.value)
       if (found) return found
+    }
+    // Check URL query param for project
+    if (route && route.query.project) {
+      const found = filteredProjects.value.find((p) => p.id === route.query.project)
+      if (found) {
+        selectedProjectId.value = found.id
+        return found
+      }
     }
     return filteredProjects.value[0] || null
   })
@@ -78,6 +102,9 @@ export function useProjects({ route, router } = {}) {
 
   function changeProject(id) {
     selectedProjectId.value = id
+    if (router && route) {
+      router.replace({ query: { ...route.query, project: id } })
+    }
   }
 
   return {

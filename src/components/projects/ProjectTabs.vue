@@ -1,4 +1,8 @@
 <script setup>
+import { useI18n } from '@/composables/useI18n.js'
+
+const { t } = useI18n()
+
 defineProps({
   activeTab: {
     type: String,
@@ -7,11 +11,6 @@ defineProps({
 })
 
 const emit = defineEmits(['change-tab'])
-
-const tabs = [
-  { key: 'development', label: 'Development' },
-  { key: 'design', label: 'Design' },
-]
 </script>
 
 <template>
@@ -19,9 +18,13 @@ const tabs = [
     <div class="segmented-control" :data-active="activeTab">
       <span class="pill"></span>
 
-      <button v-for="tab in tabs" :key="tab.key" type="button" class="tab" :class="{ active: activeTab === tab.key }"
-        @click="emit('change-tab', tab.key)">
-        {{ tab.label }}
+      <button type="button" class="tab" :class="{ active: activeTab === 'development' }"
+        @click="emit('change-tab', 'development')">
+        {{ t('projects.development') }}
+      </button>
+      <button type="button" class="tab" :class="{ active: activeTab === 'design' }"
+        @click="emit('change-tab', 'design')">
+        {{ t('projects.design') }}
       </button>
     </div>
   </div>

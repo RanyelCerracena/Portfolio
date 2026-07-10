@@ -67,6 +67,11 @@ defineProps({
 }
 
 @media (max-width: 768px) {
+  .content-scroll {
+    height: auto;
+    flex: 1;
+  }
+
   .content-inner {
     padding: 24px;
   }

@@ -40,6 +40,10 @@ defineProps({
 
 .section-header__title-italic {
   font-style: italic;
+  background: linear-gradient(135deg, #44d8dd, #9f69f8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .section-header__description {

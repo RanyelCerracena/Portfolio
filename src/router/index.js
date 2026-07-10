@@ -9,11 +9,13 @@ const router = createRouter({
       name: 'HomeView',
       path: '/',
       component: HomeView,
+      meta: { transition: 'page-back' },
     },
     {
       name: 'ProjectsView',
       path: '/projects',
       component: ProjectsView,
+      meta: { transition: 'page' },
     },
   ],
 })

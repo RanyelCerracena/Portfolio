@@ -30,13 +30,14 @@ defineProps({
 <style scoped>
 .about-card {
   padding: 18px 18px;
-  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease,
-    background 220ms ease;
+  box-shadow: none;
+  transition: transform 0.4s var(--ease-apple-spring), box-shadow 0.4s var(--ease-apple),
+    border-color 0.4s var(--ease-apple), background 0.4s var(--ease-apple);
 }
 
 .about-card:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
   border-color: rgba(255, 255, 255, 0.28);
   background: rgba(255, 255, 255, 0.12);
 }

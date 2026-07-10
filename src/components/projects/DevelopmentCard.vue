@@ -47,14 +47,23 @@ function statusColor(status) {
   flex-direction: column;
   padding: 16px;
   cursor: pointer;
+  isolation: isolate;
+  box-shadow: none;
   transition:
-    transform 200ms ease,
-    box-shadow 200ms ease;
+    transform 0.4s var(--ease-apple-spring),
+    box-shadow 0.4s var(--ease-apple);
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-6px) scale(1.015);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.card:active {
+  transform: translateY(-2px) scale(0.99);
+  transition-duration: 0.15s;
 }
 
 .card-top {
@@ -141,5 +150,42 @@ function statusColor(status) {
   color: var(--text-secondary-color);
   line-height: 1.5;
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 0;
+    overflow: hidden;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .card-top {
+    padding: 14px 14px 0;
+  }
+
+  .folder-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-title {
+    font-size: 0.88rem;
+  }
+
+  .card-divider {
+    margin: 12px 14px;
+  }
+
+  .card-description {
+    font-size: 0.75rem;
+    padding: 0 14px 14px;
+  }
+
+  .stack-tag {
+    font-size: 0.58rem;
+    padding: 2px 6px;
+  }
 }
 </style>

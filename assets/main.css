@@ -31,6 +31,30 @@
   margin: 0;
 
   scrollbar-width: none;
+
+  /* Remove outlines de foco indesejados */
+  outline: none;
+}
+
+/* Remove outline de foco em elementos interativos */
+*:focus {
+  outline: none;
+}
+
+/* Remove outline de foco em elementos interativos */
+*:focus-visible {
+  outline: none;
+}
+
+/* Estilo de seleção de texto */
+::selection {
+  background: rgba(68, 216, 221, 0.3);
+  color: inherit;
+}
+
+::-moz-selection {
+  background: rgba(68, 216, 221, 0.3);
+  color: inherit;
 }
 
 body {
@@ -48,7 +72,7 @@ body::before {
 
   background: rgba(0, 0, 0, 0.35);
 
-  z-index: 0;
+  z-index: -1;
 
   pointer-events: none;
 }
@@ -114,7 +138,135 @@ a {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 15px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  user-select: none;
+}
+
+/* ==========================================
+   SMOOTH SCROLL & SCROLL REVEAL SYSTEM
+   Apple-inspired motion design
+   ========================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Spring-like easing for Apple feel */
+:root {
+  --ease-apple: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-apple-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-apple-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px) scale(0.96);
+  filter: blur(4px);
+  transition:
+    opacity 0.8s var(--ease-apple),
+    transform 0.8s var(--ease-apple-spring),
+    filter 0.6s var(--ease-apple);
+  will-change: transform, opacity, filter;
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px) scale(0.97);
+  filter: blur(3px);
+  transition:
+    opacity 0.8s var(--ease-apple),
+    transform 0.8s var(--ease-apple-spring),
+    filter 0.6s var(--ease-apple);
+  will-change: transform, opacity, filter;
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px) scale(0.97);
+  filter: blur(3px);
+  transition:
+    opacity 0.8s var(--ease-apple),
+    transform 0.8s var(--ease-apple-spring),
+    filter 0.6s var(--ease-apple);
+  will-change: transform, opacity, filter;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  filter: blur(4px);
+  transition:
+    opacity 0.8s var(--ease-apple),
+    transform 0.8s var(--ease-apple-spring),
+    filter 0.6s var(--ease-apple);
+  will-change: transform, opacity, filter;
+}
+
+/* Active class added by IntersectionObserver */
+.reveal-visible {
+  opacity: 1;
+  transform: translate(0) scale(1) !important;
+  filter: blur(0) !important;
+}
+
+/* Stagger Delays — Apple-style precise timing */
+.delay-100 {
+  transition-delay: 60ms;
+}
+
+.delay-200 {
+  transition-delay: 120ms;
+}
+
+.delay-300 {
+  transition-delay: 180ms;
+}
+
+.delay-400 {
+  transition-delay: 240ms;
+}
+
+.delay-500 {
+  transition-delay: 300ms;
+}
+
+/* ==========================================
+   APPLE-STYLE SECTION TRANSITIONS
+   ========================================== */
+
+/* Phase 1: Content fades out with subtle scale-down */
+body.section-leaving #home,
+body.section-leaving #projects,
+body.section-leaving #about,
+body.section-leaving #contact,
+body.section-leaving #services {
+  opacity: 0;
+  transform: scale(0.98);
+  filter: blur(2px);
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease-apple), transform 0.25s var(--ease-apple), filter 0.25s var(--ease-apple);
+}
+
+
+/* Phase 2: Content enters with scale-up + blur clear */
+body.section-entering #home,
+body.section-entering #projects,
+body.section-entering #about,
+body.section-entering #contact,
+body.section-entering #services {
+  animation: section-enter 0.6s var(--ease-apple-spring) both;
+}
+
+@keyframes section-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(8px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
 }

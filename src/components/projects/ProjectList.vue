@@ -101,7 +101,7 @@ function onLeave(el, done) {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-  align-items: start;
+  align-items: stretch;
 }
 
 /* Filters slide */
@@ -130,6 +130,7 @@ function onLeave(el, done) {
 @media (max-width: 768px) {
   .projects-grid {
     grid-template-columns: 1fr;
+    align-items: stretch;
   }
 }
 </style>

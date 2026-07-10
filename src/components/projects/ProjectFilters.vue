@@ -1,4 +1,8 @@
 <script setup>
+import { useI18n } from '@/composables/useI18n.js'
+
+const { t } = useI18n()
+
 defineProps({
   filters: {
     type: Array,
@@ -13,7 +17,7 @@ defineProps({
 const emit = defineEmits(['change-filter'])
 
 function formatLabel(value) {
-  if (value === 'all') return 'All'
+  if (value === 'all') return t('projects.all')
   return value
     .split('-')
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
@@ -47,6 +51,7 @@ function formatLabel(value) {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  justify-content: center;
 }
 
 .filter-btn {
@@ -110,5 +115,17 @@ function formatLabel(value) {
 
 .filter-move {
   transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+@media (max-width: 768px) {
+  .filters-inner {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    border-radius: 16px;
+  }
 }
 </style>

@@ -65,11 +65,12 @@ function getIconClass(icon) {
   gap: 16px;
   overflow: hidden;
   border-radius: 15px;
+  box-shadow: none;
   transition:
-    transform 240ms ease,
-    box-shadow 240ms ease,
-    border-color 240ms ease,
-    background 240ms ease;
+    transform 0.4s var(--ease-apple-spring),
+    box-shadow 0.4s var(--ease-apple),
+    border-color 0.4s var(--ease-apple),
+    background 0.4s var(--ease-apple);
 }
 
 .service-card__top-line {
@@ -170,10 +171,10 @@ function getIconClass(icon) {
 }
 
 .service-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-8px) scale(1.02);
   border-color: rgba(255, 255, 255, 0.28);
   background: rgba(255, 255, 255, 0.14);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .service-card:hover .service-card__top-line {

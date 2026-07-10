@@ -1,4 +1,8 @@
 <script setup>
+import { useI18n } from '@/composables/useI18n.js'
+
+const { t } = useI18n()
+
 defineProps({
   stack: { type: Array, required: true },
 })
@@ -6,7 +10,7 @@ defineProps({
 
 <template>
   <div class="stack" v-if="stack.length">
-    <h3 class="section-title">Technologies</h3>
+    <h3 class="section-title">{{ t('projects.technologies') }}</h3>
     <div class="stack-list">
       <span v-for="tech in stack" :key="tech" class="stack-tag">{{ tech }}</span>
     </div>

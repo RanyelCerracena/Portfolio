@@ -3,6 +3,7 @@ export default [
     id: 'ai-voice-assistant',
     type: 'development',
     title: 'AI Voice Assistant',
+    logo: '',
     description:
       'A sophisticated voice AI deployed at Tata Motors, capable of natural language understanding and real-time response.',
     longDescription:
@@ -23,6 +24,7 @@ export default [
     id: 'ecommerce-platform',
     type: 'development',
     title: 'E-commerce Platform',
+    logo: '',
     description:
       'A full-stack e-commerce solution with real-time inventory management and secure payment integration.',
     longDescription:
@@ -43,6 +45,7 @@ export default [
     id: 'modern-portfolio',
     type: 'design',
     title: 'Modern Portfolio',
+    logo: '',
     description:
       'A modern, responsive portfolio website built with Vue 3 and Vite, featuring glassmorphism design.',
     longDescription:
@@ -63,6 +66,7 @@ export default [
     id: 'techcorp-branding',
     type: 'design',
     title: 'Brand Identity - TechCorp',
+    logo: '',
     description:
       'Complete visual identity for a leading technology company, including logo and brand guidelines.',
     longDescription:
@@ -83,6 +87,7 @@ export default [
     id: 'social-media-kit',
     type: 'design',
     title: 'Social Media Kit',
+    logo: '',
     description:
       'A set of cohesive social media templates designed for high engagement and brand consistency.',
     longDescription:
@@ -103,6 +108,7 @@ export default [
     id: 'desktop-tool',
     type: 'development',
     title: 'Desktop Management Tool',
+    logo: '',
     description: 'A high-performance desktop application for managing complex system resources.',
     longDescription:
       'A powerful desktop application built with Electron, designed to provide deep insights into system resource usage and management.',

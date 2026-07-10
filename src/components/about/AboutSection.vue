@@ -1,34 +1,16 @@
 <script setup>
 import { onMounted, ref, nextTick } from 'vue'
+import { useI18n } from '@/composables/useI18n.js'
 import InfoCard from './InfoCard.vue'
 import JourneyCard from './JourneyCard.vue'
 import TechCard from './TechCard.vue'
 import StatusCard from './StatusCard.vue'
 
+const { t } = useI18n()
 const isMounted = ref(false)
 
-const twoCols = [
-  { title: 'Product Engineering', subtitle: 'Design-led software delivery' },
-  { title: 'Digital Experience', subtitle: 'Usability + visual consistency' },
-  { title: 'API & Systems', subtitle: 'Reliable integrations at scale' },
-  { title: 'Continuous Craft', subtitle: 'Iteration for long-term quality' },
-]
-
-const journeySteps = [
-  { year: '2022', text: 'Building foundational skills' },
-  { year: '2023', text: 'Shipped desktop experiences' },
-  { year: '2024', text: 'Developed backend systems' },
-  { year: 'Today', text: 'Delivering modern digital products' },
-]
-
 const techItems = ['Vue', 'Go', 'C#', '.NET', 'Docker', 'SQL', 'Git', 'REST']
-
-const statusItems = [
-  { text: 'Looking for internships', dot: '#44dd81' },
-  { text: 'Learning Go', dot: '#9f69f8' },
-  { text: 'Building Portfolio', dot: '#44d8dd' },
-  { text: 'Open Source', dot: '#f983e1' },
-]
+const statusColors = ['#44dd81', '#9f69f8', '#44d8dd', '#f983e1']
 
 function applyEntrance(el) {
   if (!el) return
@@ -36,16 +18,18 @@ function applyEntrance(el) {
   const cards = el.querySelectorAll('[data-about-stagger]')
   cards.forEach((card) => {
     card.style.opacity = '0'
-    card.style.transform = 'translateY(14px)'
+    card.style.transform = 'translateY(24px) scale(0.96)'
+    card.style.filter = 'blur(3px)'
   })
 
-  // Small stagger
+  // Apple-style stagger with spring easing
   cards.forEach((card, i) => {
-    const delay = i * 70
-    card.style.transition = `opacity 420ms ease ${delay}ms, transform 480ms cubic-bezier(0.25, 0.1, 0.25, 1) ${delay}ms`
+    const delay = i * 80
+    card.style.transition = `opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}ms, transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${delay}ms, filter 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}ms`
     requestAnimationFrame(() => {
       card.style.opacity = '1'
-      card.style.transform = 'translateY(0)'
+      card.style.transform = 'translateY(0) scale(1)'
+      card.style.filter = 'blur(0)'
     })
   })
 }
@@ -63,26 +47,7 @@ onMounted(async () => {
       <aside class="about-intro glass about-intro__card" data-about-stagger>
         <div class="about-intro__content">
           <div class="about-intro__kicker">Ranyel Cerracena</div>
-          <p class="about-intro__text">I've always believed that technology is another form of creativity.
-            <br>
-            <br>
-            My story didn't begin with programming—it began with design. As a teenager, I spent hours creating
-            wallpapers, experimenting with Photoshop Touch, and exploring every tool that allowed me to transform ideas
-            into something visual. I wasn't just learning software; I was discovering the excitement of creating.
-            <br>
-            <br>
-            Years later, programming entered my life and completely changed the way I approached technology. I realized
-            that code wasn't replacing creativity—it was expanding it. Every application, API or interface became
-            another canvas where ideas could take shape.
-            <br>
-            <br>
-            Today, I combine both passions. I enjoy building robust software, but I also care deeply about the
-            experience people have while using it. To me, engineering and design are not opposites—they are
-            complementary parts of the same process.
-            <br>
-            <br>
-            My goal is simple: create digital products that are not only functional, but memorable.
-          </p>
+          <p class="about-intro__text" v-html="t('about.intro').replace(/\n/g, '<br>')"></p>
         </div>
 
       </aside>
@@ -91,14 +56,14 @@ onMounted(async () => {
       <div class="about-right" aria-label="About modules">
 
         <div class="about-grid about-grid--top">
-          <div v-for="(card, i) in twoCols" :key="i" data-about-stagger class="stagger-item">
+          <div v-for="(card, i) in t('about.twoCols')" :key="i" data-about-stagger class="stagger-item">
             <InfoCard :title="card.title" :subtitle="card.subtitle" />
           </div>
         </div>
 
         <div class="about-grid about-grid--mid">
           <div data-about-stagger class="stagger-item">
-            <JourneyCard :steps="journeySteps" />
+            <JourneyCard :steps="t('about.journey')" />
           </div>
         </div>
 
@@ -110,7 +75,7 @@ onMounted(async () => {
 
         <div class="about-grid about-grid--bottom">
           <div data-about-stagger class="stagger-item">
-            <StatusCard title="Currently" :items="statusItems" badge="Now" />
+            <StatusCard :title="t('about.currently')" :items="t('about.statusItems').map((item, i) => ({ ...item, dot: statusColors[i] }))" :badge="t('about.now')" />
           </div>
         </div>
       </div>

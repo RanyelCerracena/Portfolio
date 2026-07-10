@@ -1,34 +1,56 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { useI18n } from '@/composables/useI18n.js'
 import LoadingView from './components/layout/LoadingView.vue'
 import MouseAnimation from './components/MouseAnimation.vue'
+import Navbar from './components/layout/NavBar.vue'
+
+const { t } = useI18n()
 
 const isInitialLoading = ref(true)
+const route = useRoute()
 
+const showVideo = computed(() => route.name !== 'projects')
 
 onMounted(() => {
-  const TOTAL_DURATION_MS = 4500
+  const TOTAL_DURATION_MS = 4200
 
   setTimeout(() => {
     isInitialLoading.value = false
   }, TOTAL_DURATION_MS)
 })
+
+watch(() => route.name, (name) => {
+  if (name === 'projects') {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+}, { immediate: true })
 </script>
 
 <template>
   <LoadingView v-if="isInitialLoading" />
   <MouseAnimation />
-  <p class="quote" :class="{ 'quote-entrance': !isInitialLoading }">
-    Where your curiosity has brought you
+  <p v-if="showVideo" class="quote" :class="{ 'quote-entrance': !isInitialLoading }">
+    {{ t('quote') }}
   </p>
 
   <div class="app-shell">
-    <video ref="backgroundVideo" @canplaythrough="videoReady = true" class="background-video" autoplay muted loop
-      playsinline preload="auto">
+    <video v-if="showVideo" ref="backgroundVideo" @canplaythrough="videoReady = true"
+      class="background-video" autoplay muted loop playsinline preload="auto">
       <source src="/videos/wake_up_neo_alpha.webm" type="video/webm" />
     </video>
+    <div class="navbar-fixed">
+      <Navbar />
+    </div>
     <div class="routerView">
-      <RouterView />
+      <RouterView v-slot="{ Component, route: currentRoute }">
+        <Transition :name="currentRoute.meta.transition || 'page'" mode="out-in">
+          <component :is="Component" :key="currentRoute.fullPath" />
+        </Transition>
+      </RouterView>
     </div>
   </div>
 </template>
@@ -38,8 +60,15 @@ onMounted(() => {
   position: relative;
 }
 
+.navbar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
 .routerView {
-  /* deixa a página rolar normalmente (landing page) */
   position: relative;
   z-index: 1;
 }
@@ -60,7 +89,6 @@ onMounted(() => {
 }
 
 .background-video {
-  /* tira o fixed: agora o vídeo ocupa o topo e o conteúdo começa abaixo */
   width: 100%;
   height: 100dvh;
 
@@ -71,5 +99,55 @@ onMounted(() => {
 
   pointer-events: none;
   user-select: none;
+}
+
+/* ==========================================
+   PAGE TRANSITIONS
+   ========================================== */
+
+/* Default: Home → Projects */
+.page-enter-active {
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.page-leave-active {
+  transition:
+    opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.99);
+}
+
+/* Projects → Home (reverse) */
+.page-back-enter-active {
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.page-back-leave-active {
+  transition:
+    opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.page-back-enter-from {
+  opacity: 0;
+  transform: translateY(-20px) scale(0.98);
+}
+
+.page-back-leave-to {
+  opacity: 0;
+  transform: translateY(10px) scale(0.99);
 }
 </style>

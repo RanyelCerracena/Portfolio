@@ -1,8 +1,9 @@
 <script setup>
 import { onMounted, ref } from 'vue'
+import { useI18n } from '@/composables/useI18n.js'
 import ServiceCard from './ServiceCard.vue'
-import { services } from '@/data/services.js'
 
+const { t } = useI18n()
 const sectionRef = ref(null)
 const isVisible = ref(false)
 
@@ -31,24 +32,23 @@ onMounted(() => {
   <section ref="sectionRef" class="services" :class="{ 'services--visible': isVisible }">
 
     <header class="services__header">
-      <div class="services__small">SERVICES</div>
+      <div class="services__small">{{ t('sections.services.kicker') }}</div>
 
       <h2 class="services__title" style="white-space: nowrap;">
-        <span class="services__title-regular">What can I build</span>
-        <span class="services__title-italic"> for you?</span>
+        <span class="services__title-regular">{{ t('sections.services.title') }}</span>
+        <span class="services__title-italic">{{ t('sections.services.titleItalic') }}</span>
       </h2>
 
       <p class="services__subtitle">
-        I transform ideas into premium digital products through design and development—crafted for performance,
-        clarity and long-term success.
+        {{ t('sections.services.description') }}
       </p>
     </header>
 
     <div class="services__grid">
       <Transition name="services-fade-slide">
         <div v-if="isVisible" class="services-grid-inner">
-          <ServiceCard v-for="(s, idx) in services" :key="s.id" class="services__card" :accent="s.accent"
-            :title="s.title" :icon="s.icon" :icon-rotation="s.iconRotation" :description="s.description"
+          <ServiceCard v-for="(s, idx) in t('services.cards')" :key="idx" class="services__card" :accent="['blue', 'purple', 'green'][idx]"
+            :title="s.title" :icon="['code', 'palette', 'rocket'][idx]" :icon-rotation="5" :description="s.description"
             :services="s.services" :footer-text="s.footerText" :style="{ '--stagger': `${idx}` }" />
         </div>
       </Transition>
@@ -84,6 +84,10 @@ onMounted(() => {
 
 .services__title-italic {
   font-style: italic;
+  background: linear-gradient(135deg, #44d8dd, #9f69f8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .services__subtitle {
@@ -104,21 +108,24 @@ onMounted(() => {
 }
 
 .services__card {
-  transform: translateY(10px);
+  transform: translateY(24px) scale(0.95);
   opacity: 0;
-  animation: services-card-in 280ms ease forwards;
-  animation-delay: calc(var(--stagger) * 90ms);
+  filter: blur(3px);
+  animation: services-card-in 0.7s var(--ease-apple-spring) forwards;
+  animation-delay: calc(var(--stagger) * 100ms);
 }
 
 @keyframes services-card-in {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(24px) scale(0.95);
+    filter: blur(3px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0px);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
